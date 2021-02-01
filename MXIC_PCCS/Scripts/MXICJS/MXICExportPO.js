@@ -32,8 +32,6 @@ if (title == 'MXIC') {
     //table名稱
     tablename = "MXIC_DepartmentManagement"
 } else if (title == '廠商管理') {
-
-
     //搜尋url這個要先寫
     ajaxUrl = "/VendorManagement/VendorList"
     //編輯資料取的url
@@ -47,14 +45,10 @@ if (title == 'MXIC') {
     //table名稱
     tablename = "MXIC_VendorManagement"
 } else if (title == '報價單') {
-
-
     //搜尋url這個要先寫
     ajaxUrl = "/Quotation/SearchQuotation"
     //table名稱
     tablename = "MXIC_Quotation"
-
-
 } else if (title == '班表設定') {
     //搜尋url這個要先寫
     ajaxUrl = "/ScheduleSetting/ScheduleList"
@@ -78,10 +72,14 @@ if (title == 'MXIC') {
     ajaxUrl = "/SwipeInfo/CheckinList"
     editDetailUrl = "/SwipeInfo/SwipeInfoDetail"
     editUrl = "/SwipeInfo/EditSwipe"
+} else if (title == '刷卡警報') {
+    tablename = "MXIC_View_Swipe_Double"
+    ajaxUrl = "/SwipeInfo/AlarmList"
+    //是否出現刪除checkbox
+    multiselect = false;
 } else if (title == '匯出計價單') {
     ajaxUrl="/ExportPO/DownloadQuotation";
     tablename="MXIC_ExportPO";
-   
 }
 
 //navBar & indexBTN 資料格式範例 
@@ -93,6 +91,7 @@ var navData = [
     { 'name': '班表設定', 'url': '../ScheduleSetting/', 'commonly_used': '1' },
     { 'name': '證照管理', 'url': '../LisenceManagement/', 'commonly_used': '1' },
     { 'name': '刷卡紀錄', 'url': '../SwipeInfo/', 'commonly_used': '1' },
+    { 'name': '刷卡警報', 'url': '../SwipeInfo/Alarm', 'commonly_used': '1' },
     { 'name': '匯出報表', 'url': '../ExportPO/', 'commonly_used': '1' }
 ]
 

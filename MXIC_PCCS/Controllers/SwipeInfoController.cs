@@ -22,9 +22,23 @@ namespace MXIC_PCCS.Controllers
             return View();
         }
 
+        public ActionResult Alarm()
+        {
+            var id = HttpContext.User.Identity.Name;
+            ViewBag.ID = id;
+            return View();
+        }
+
         public string CheckinList(string VendorName, string EmpID, string EmpName, DateTime? StartTime, DateTime? EndTime, string AttendTypeSelect)
         {              
             string str = _ISwipeInfo.CheckinList(VendorName, EmpID, EmpName, StartTime, EndTime, AttendTypeSelect);
+
+            return str;
+        }
+
+        public string AlarmList(string PoNo, string VendorName, string EmpName, DateTime? StartTime, DateTime? EndTime, string CheckType)
+        {
+            string str = _ISwipeInfo.AlarmList(PoNo, VendorName, EmpName, StartTime, EndTime, CheckType);
 
             return str;
         }

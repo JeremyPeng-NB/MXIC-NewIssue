@@ -11,7 +11,8 @@ var navData = [
     { 'name': '報價單', 'url': '../Quotation/', 'commonly_used': '1','Img':'報價單1x' },
     { 'name': '班表設定', 'url': '../ScheduleSetting/', 'commonly_used': '1','Img':'班表1x' },
     { 'name': '證照管理', 'url': '../LisenceManagement/', 'commonly_used': '1','Img':'證照管理1x' },
-    { 'name': '刷卡紀錄', 'url': '../SwipeInfo/', 'commonly_used': '1','Img':'刷卡紀錄1x' },
+    { 'name': '刷卡紀錄', 'url': '../SwipeInfo/', 'commonly_used': '1', 'Img': '刷卡紀錄1x' },
+    { 'name': '刷卡警報', 'url': '../SwipeInfo/Alarm', 'commonly_used': '1', 'Img': '刷卡警報1x' },
     { 'name': '匯出報表', 'url': '../ExportPO/', 'commonly_used': '1','Img':'計價單1x' }
 ]
 

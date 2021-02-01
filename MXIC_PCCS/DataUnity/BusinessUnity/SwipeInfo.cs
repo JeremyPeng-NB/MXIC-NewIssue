@@ -89,6 +89,41 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             return (Str);
         }
 
+        public string AlarmList(string PoNo, string VendorName, string EmpName, DateTime? StartTime, DateTime? EndTime, string CheckType)
+        {
+            var _List = _db.View_Swipe_Doubles.Where(x => x.CheckSum != "1010").Select(x => new { x.PoNo, x.VendorName, x.EmpID, x.CheckType, x.EmpName, x.SwipeTime, x.WorkShift }).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+
+            if (!string.IsNullOrWhiteSpace(PoNo))
+            {
+                _List = _List.Where(x => x.PoNo.ToLower().Contains(PoNo.ToLower())).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+            }
+
+            if (!string.IsNullOrWhiteSpace(VendorName))
+            {
+                _List = _List.Where(x => x.VendorName.ToLower().Contains(VendorName.ToLower())).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+            }
+
+            if (!string.IsNullOrWhiteSpace(EmpName))
+            {
+                _List = _List.Where(x => x.EmpName.ToLower().Contains(EmpName.ToLower())).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+            }
+
+            if (!string.IsNullOrWhiteSpace(StartTime.ToString()) && !string.IsNullOrWhiteSpace(EndTime.ToString()))
+            {   //日期加一天 再減去一秒
+                DateTime End2 = EndTime.Value.AddDays(1).AddSeconds(-1);
+                _List = _List.Where(x => x.SwipeTime >= StartTime && x.SwipeTime <= End2).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+            }
+
+            if (!string.IsNullOrWhiteSpace(CheckType))
+            {
+                _List = _List.Where(x => x.CheckType.ToLower().Contains(CheckType.ToLower())).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+            }
+
+            string Str = JsonConvert.SerializeObject(_List, Formatting.Indented);
+
+            return (Str);
+        }
+
         public string SwipeInfoDetail(string EditID)
         {
             var SwipeInfoDetail = _db.MXIC_SwipeInfos.Where(x => x.EditID.ToString() == EditID).Select(x => new { x.AttendType, x.Hour });
