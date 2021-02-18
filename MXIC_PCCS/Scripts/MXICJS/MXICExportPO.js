@@ -32,6 +32,8 @@ if (title == 'MXIC') {
     //table名稱
     tablename = "MXIC_DepartmentManagement"
 } else if (title == '廠商管理') {
+
+
     //搜尋url這個要先寫
     ajaxUrl = "/VendorManagement/VendorList"
     //編輯資料取的url
@@ -45,10 +47,14 @@ if (title == 'MXIC') {
     //table名稱
     tablename = "MXIC_VendorManagement"
 } else if (title == '報價單') {
+
+
     //搜尋url這個要先寫
     ajaxUrl = "/Quotation/SearchQuotation"
     //table名稱
     tablename = "MXIC_Quotation"
+
+
 } else if (title == '班表設定') {
     //搜尋url這個要先寫
     ajaxUrl = "/ScheduleSetting/ScheduleList"
@@ -80,6 +86,7 @@ if (title == 'MXIC') {
 } else if (title == '匯出計價單') {
     ajaxUrl="/ExportPO/DownloadQuotation";
     tablename="MXIC_ExportPO";
+   
 }
 
 //navBar & indexBTN 資料格式範例 

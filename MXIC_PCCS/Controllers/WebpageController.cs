@@ -139,6 +139,29 @@ namespace MXIC_PCCS.Controllers
             return (Str);
         }
 
+        public string SwipeDoubleCheckTypeSelect(string TableName)
+        {
+            List<SelectViewModel> SelectListx = new List<SelectViewModel>();
+
+            var list = _db.View_Swipe_Doubles.Select(x => new { x.CheckType }).Distinct().OrderBy(x => x.CheckType).ToList();
+            //var list = _db.SwipeInfoSelects.Select(x => new { x.name }).Distinct().OrderBy(x => x.name).ToList();
+
+
+            foreach (var item in list)
+            {
+                var SelectItem = new SelectViewModel()
+                {
+                    name = item.CheckType,
+                    value = item.CheckType
+                };
+                SelectListx.Add(SelectItem);
+            }
+
+            string Str = JsonConvert.SerializeObject(SelectListx, Formatting.Indented);
+
+            return (Str);
+        }
+
 
         public string marqueeUrl()
         {

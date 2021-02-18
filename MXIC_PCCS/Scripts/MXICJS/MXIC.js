@@ -96,8 +96,7 @@ if (title == 'MXIC') {
     ajaxUrl = "/SwipeInfo/AlarmList"
     //是否出現刪除checkbox
     multiselect = false;
-}
-else if (title == '匯出計價單') {
+} else if (title == '匯出計價單') {
     tablename = "MXIC_ExportPO"
 }
 //dataList
