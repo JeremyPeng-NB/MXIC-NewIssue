@@ -86,7 +86,12 @@ if (title == 'MXIC') {
 } else if (title == '匯出計價單') {
     ajaxUrl="/ExportPO/DownloadQuotation";
     tablename="MXIC_ExportPO";
-   
+} else if (title == '班別時間設定') {
+    tablename = "MXIC_SwipeSet"
+    ajaxUrl = "/SwipeSet/UserList"
+    editDetailUrl = "/SwipeSet/EditTimeDetail",
+    editUrl = "/SwipeSet/EditTime"
+    multiselect = false;
 }
 
 //navBar & indexBTN 資料格式範例 
@@ -98,6 +103,7 @@ var navData = [
     { 'name': '班表設定', 'url': '../ScheduleSetting/', 'commonly_used': '1' },
     { 'name': '證照管理', 'url': '../LisenceManagement/', 'commonly_used': '1' },
     { 'name': '刷卡紀錄', 'url': '../SwipeInfo/', 'commonly_used': '1' },
+    { 'name': '班表時間設定', 'url': '../SwipeSet/', 'commonly_used': '1' },
     { 'name': '刷卡警報', 'url': '../SwipeInfo/Alarm', 'commonly_used': '1' },
     { 'name': '匯出報表', 'url': '../ExportPO/', 'commonly_used': '1' }
 ]
@@ -280,7 +286,7 @@ function navbarItem(e) {
     for (i = 0; i < arrLength; i++) {
         $('.navber > ul').append('<li><a href="./' + e[i].url + '">' + e[i].name + '</a></li>')
     }
-    if (arrLength <= 9) {
+    if (arrLength <= 10) {
         $('ul > li').css('width', '' + menuBTN + '%');
     } else {
         $('.navber > ul').css('flex-wrap', 'wrap')

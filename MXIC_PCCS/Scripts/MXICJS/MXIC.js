@@ -541,7 +541,7 @@ function navbarItem(e) {
     for (i = 0; i < arrLength; i++) {
         $('.navber > ul').append('<li><a href="./' + e[i].url + '">' + e[i].name + '</a></li>')
     }
-    if (arrLength <= 9) {
+    if (arrLength <= 10) {
         $('ul > li').css('width', '' + menuBTN + '%');
     } else {
         $('.navber > ul').css('flex-wrap', 'wrap')
