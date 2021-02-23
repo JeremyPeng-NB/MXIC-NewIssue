@@ -15,11 +15,14 @@ namespace MXIC_PCCS.Models
 
         [Required]
         [StringLength(50)]
-        public string PoNo1 { get; set; }
+        public string PoNo { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime Date { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string AttendType { get; set; }
+        public string WorkShift { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -30,8 +33,5 @@ namespace MXIC_PCCS.Models
         public string SwipeEndTime { get; set; }
 
         public Guid EditID { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime Date { get; set; }
     }
 }

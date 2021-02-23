@@ -12,9 +12,8 @@ namespace MXIC_PCCS.Controllers
     [Authorize]
     public class SwipeSetController : Controller
     {
-        
         ISwipeSet _ISwipeSet = new SwipeSet();
-        // GET: SwipeSet
+
         public ActionResult Index()
         {
             var id = HttpContext.User.Identity.Name;
@@ -22,9 +21,9 @@ namespace MXIC_PCCS.Controllers
             return View();
         }
 
-        public string UserList(string PoNo1, DateTime? Date)
+        public string UserList(string PoNo, DateTime? Date)
         {
-            string str = _ISwipeSet.UserList(PoNo1, Date);
+            string str = _ISwipeSet.UserList(PoNo, Date);
 
             return str;
         }

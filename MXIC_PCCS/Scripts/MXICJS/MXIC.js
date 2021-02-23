@@ -104,7 +104,6 @@ if (title == 'MXIC') {
     editDetailUrl = "/SwipeSet/EditTimeDetail",
     editUrl = "/SwipeSet/EditTime"
     multiselect = false;
-
 }
 //dataList
 // var dataList = [

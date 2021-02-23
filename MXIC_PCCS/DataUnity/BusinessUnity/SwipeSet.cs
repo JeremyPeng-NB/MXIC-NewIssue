@@ -53,20 +53,17 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             }
             #endregion
 
-            public string UserList(string PoNo1, DateTime? Date)
+            public string UserList(string PoNo, DateTime? Date)
             {
-
-                var _List = _db.SwipeSets.Select(x => new { x.PoNo1, x.AttendType, x.SwipeStartTime, x.SwipeEndTime, x.EditID, x.Date });
-
-                if (!string.IsNullOrWhiteSpace(PoNo1))
+                var _List = _db.SwipeSets.Select(x => new { x.PoNo, x.WorkShift, x.SwipeStartTime, x.SwipeEndTime, x.EditID, x.Date });
+                
+                if (!string.IsNullOrWhiteSpace(PoNo))
                 {
-                    _List = _List.Where(x => x.PoNo1.ToLower().Contains(PoNo1.ToLower()));
+                    _List = _List.Where(x => x.PoNo.ToLower().Contains(PoNo.ToLower()));
                 }
                 if (!string.IsNullOrWhiteSpace(Date.ToString()))
                 {
                     string s = Convert.ToDateTime(Date).Year.ToString() + "-" + Convert.ToDateTime(Date).Month.ToString("00");
-                    //string s = "2021-6";
-                    //string s = "2021-06";
                     _List = _List.Where(x => x.Date.ToString().Contains(s));
                     //TODO:搜尋功能失效，先測試另一行程式有無作用
                     //_List = _List.Where(x => x.Date.Day.ToString() );
@@ -75,7 +72,6 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 }
 
                 string Str = JsonConvert.SerializeObject(_List, Formatting.Indented);
-
                 return (Str);
             }
 
@@ -84,6 +80,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 string Str = "修改成功";
 
                 var EditTimeDetail = _db.SwipeSets.Where(x => x.EditID.ToString() == EditID).Select(x => new { x.SwipeStartTime, x.SwipeEndTime });
+
                 string responseStr = JsonConvert.SerializeObject(EditTimeDetail, Formatting.Indented);
 
                 return (responseStr);
@@ -92,21 +89,16 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             public string EditTime(string EditID, string SwipeStartTime, string SwipeEndTime)
             {
                 string MessageStr = "修改成功";
-
-                //Todo : 這些要先從當前修改的資料EditID，去反查出以下的資料
-
                 var EditTimeStr = _db.SwipeSets.Where(x => x.EditID.ToString() == EditID).FirstOrDefault();
 
                 //以下給值
-                string PO = EditTimeStr.PoNo1;
-                string AttendType = EditTimeStr.AttendType;
+                string PoNo = EditTimeStr.PoNo;
+                string WorkShift = EditTimeStr.WorkShift;
                 DateTime StartTime = Convert.ToDateTime(EditTimeStr.Date);
-                //DateTime EndTime = Convert.ToDateTime("2021-12-01");
                 DateTime EndTime = Convert.ToDateTime(EditTimeStr.Date.Year.ToString() + "-12-31");
-                //DateTime EndTime = DateTime.Parse(EditTimeStr.Date.Year.ToString()).AddDays(1).AddSeconds(-1);
 
                 //以下會查出多筆 該PO 同班別 不同月份 的 資料
-                var EditTime = _db.SwipeSets.Where(x => x.PoNo1 == PO & x.AttendType == AttendType & x.Date >= StartTime & x.Date <= EndTime);
+                var EditTime = _db.SwipeSets.Where(x => x.PoNo == PoNo & x.WorkShift == WorkShift & x.Date >= StartTime & x.Date <= EndTime);
                 try
                 {
                     foreach (var EditTimeItem in EditTime)
@@ -121,9 +113,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 {
                     MessageStr = ex.ToString();
                 }
-
                 return (MessageStr);
             }
-        
     }
 }

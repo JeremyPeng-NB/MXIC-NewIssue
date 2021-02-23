@@ -333,6 +333,7 @@
     <Content Include="Img\ICON\證照管理1x.png" />
     <Content Include="Img\ICON\部門權限管理1x.png" />
     <Content Include="Img\MXIC_Title.jpg" />
+    <Content Include="Properties\PublishProfiles\Web_Deploy_Package.pubxml.user" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -364,6 +365,7 @@
     <Content Include="Content\MXIC\計價單.xlsx" />
     <Content Include="Content\報價單範本.xlsx" />
     <Content Include="Content\計價單.xlsx" />
+    <None Include="Properties\PublishProfiles\Web_Deploy_Package.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

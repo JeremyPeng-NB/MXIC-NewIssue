@@ -8,7 +8,7 @@ namespace MXIC_PCCS.DataUnity.Interface
     interface ISwipeSet
     {
 
-        string UserList(string PoNo1, DateTime? Date);
+        string UserList(string PoNo, DateTime? Date);
 
         string EditTimeDetail(string EditID);
 
