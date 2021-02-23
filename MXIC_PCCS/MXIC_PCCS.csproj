@@ -172,6 +172,7 @@
     <Compile Include="Controllers\QuotationController.cs" />
     <Compile Include="Controllers\ScheduleSettingController.cs" />
     <Compile Include="Controllers\SwipeInfoController.cs" />
+    <Compile Include="Controllers\SwipeSetController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\VendorManagementController.cs" />
     <Compile Include="Controllers\WebpageController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="DataUnity\BusinessUnity\Quotation.cs" />
     <Compile Include="DataUnity\BusinessUnity\ScheduleSetting.cs" />
     <Compile Include="DataUnity\BusinessUnity\SwipeInfo.cs" />
+    <Compile Include="DataUnity\BusinessUnity\SwipeSet.cs" />
     <Compile Include="DataUnity\BusinessUnity\UserManagement.cs" />
     <Compile Include="DataUnity\BusinessUnity\VendorManagement.cs" />
     <Compile Include="DataUnity\Interface\IDepartmentManagement.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="DataUnity\Interface\IQuotation.cs" />
     <Compile Include="DataUnity\Interface\IScheduleSetting.cs" />
     <Compile Include="DataUnity\Interface\ISwipeInfo.cs" />
+    <Compile Include="DataUnity\Interface\ISwipeSet.cs" />
     <Compile Include="DataUnity\Interface\IUserManagement.cs" />
     <Compile Include="DataUnity\Interface\IVendorManagement.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,6 +212,7 @@
     <Compile Include="Models\ScheduleProperty.cs" />
     <Compile Include="Models\ScheduleSetting.cs" />
     <Compile Include="Models\SwipeInfo.cs" />
+    <Compile Include="Models\SwipeSet.cs" />
     <Compile Include="Models\UserManagement.cs" />
     <Compile Include="Models\VendorManagement.cs" />
     <Compile Include="Models\View_Swipe.cs" />
@@ -420,6 +424,7 @@
     <Content Include="Views\Webpage\_PartialSetting.cshtml" />
     <Content Include="Views\ExportPO\ExportSchedule.cshtml" />
     <Content Include="Views\SwipeInfo\Alarm.cshtml" />
+    <Content Include="Views\SwipeSet\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
