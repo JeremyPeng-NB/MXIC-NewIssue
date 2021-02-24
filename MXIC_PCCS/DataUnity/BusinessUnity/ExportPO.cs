@@ -514,7 +514,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             //刷卡資料有異常未修改的狀態，就不給匯出計價單!!
             #region 刷卡資料有異常未修改的狀態，就不給匯出計價單!!
 
-            var AttendError = _db.MXIC_SwipeInfos.Where(x => x.AttendType == "異常" && x.WORK_DATETIME >= TheMonthStart && x.WORK_DATETIME <= TheMonthEnd);
+            var AttendError = _db.MXIC_View_Swipes.Where(x => x.AttendType == "異常" && x.Date >= TheMonthStart && x.Date <= TheMonthEnd);
 
             var Order = _db.MXIC_Quotations.Where(x => x.PoNo == PoNo);
 

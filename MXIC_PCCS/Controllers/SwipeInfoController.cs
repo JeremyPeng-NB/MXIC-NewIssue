@@ -39,7 +39,10 @@ namespace MXIC_PCCS.Controllers
         public string AlarmList(string PoNo, string VendorName, string EmpName, DateTime? StartTime, DateTime? EndTime, string CheckType)
         {
             string str = _ISwipeInfo.AlarmList(PoNo, VendorName, EmpName, StartTime, EndTime, CheckType);
-
+            if (str.Contains("測試"))
+            {
+                TempData["message"] = "目前無刷卡異常!以下為測試資料。";
+            }
             return str;
         }
 

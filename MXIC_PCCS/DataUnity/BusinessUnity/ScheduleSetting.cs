@@ -434,9 +434,9 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 {
                     foreach (var Leave in LeaveInfo)
                     {
-                        var AttendCheck = _dbMXIC.FAC_ATTENDLISTs.Where(x => x.WORKER_NAME == ListVendorName.EmpName && x.WORK_DATETIME == Leave.Date);
-                        if (!AttendCheck.Any())
-                        {
+                        //var AttendCheck = _dbMXIC.FAC_ATTENDLISTs.Where(x => x.WORKER_NAME == ListVendorName.EmpName && x.WORK_DATETIME == Leave.Date);
+                        //if (!AttendCheck.Any())
+                        //{
                             var ColAttendant = 2 * int.Parse(Leave.Date.ToString("dd")) + 1;
                             sheet.Cells[RowAttendant, ColAttendant, RowAttendant + 1, ColAttendant + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
                             sheet.Cells[RowAttendant, ColAttendant, RowAttendant + 1, ColAttendant + 1].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(212, 212, 212));//設定背景顏色
@@ -448,7 +448,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
 
                             sheet.Cells[RowAttendant, ColAttendant + 1].Value = "";
                             sheet.Cells[RowAttendant, ColAttendant + 1].Style.Font.Size = 8;
-                        }
+                        //}
                     }
                 }
 

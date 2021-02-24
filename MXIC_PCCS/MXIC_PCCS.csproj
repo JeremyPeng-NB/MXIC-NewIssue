@@ -211,14 +211,15 @@
     <Compile Include="Models\QuotationProperty.cs" />
     <Compile Include="Models\ScheduleProperty.cs" />
     <Compile Include="Models\ScheduleSetting.cs" />
+    <Compile Include="Models\SwipeDouble.cs" />
     <Compile Include="Models\SwipeInfo.cs" />
     <Compile Include="Models\SwipeSet.cs" />
     <Compile Include="Models\UserManagement.cs" />
     <Compile Include="Models\VendorManagement.cs" />
-    <Compile Include="Models\View_Swipe.cs" />
     <Compile Include="Models\NavData.cs" />
     <Compile Include="Models\SelectViewModel.cs" />
     <Compile Include="Models\SelectList.cs" />
+    <Compile Include="Models\View_Swipe.cs" />
     <Compile Include="Models\View_Swipe_Double.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />

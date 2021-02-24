@@ -119,11 +119,21 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 _List = _List.Where(x => x.CheckType.ToLower().Contains(CheckType.ToLower())).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
             }
 
-            string Str = JsonConvert.SerializeObject(_List, Formatting.Indented);
+            string Str;
+
+            if (_List.Any())
+            {
+                Str = JsonConvert.SerializeObject(_List, Formatting.Indented);
+            }
+            else
+            {
+                var List = _db.SwipeDouble.Select(x => new { x.PoNo, x.VendorName, x.EmpID, x.CheckType, x.EmpName, x.SwipeTime, x.WorkShift });
+                Str = JsonConvert.SerializeObject(List, Formatting.Indented);
+            }
 
             return (Str);
         }
-
+    
         public string SwipeInfoDetail(string EditID)
         {
             var SwipeInfoDetail = _db.MXIC_SwipeInfos.Where(x => x.EditID.ToString() == EditID).Select(x => new { x.AttendType, x.Hour });

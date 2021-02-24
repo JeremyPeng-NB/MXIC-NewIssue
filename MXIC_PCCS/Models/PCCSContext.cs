@@ -25,6 +25,8 @@ namespace MXIC_PCCS.Models
 
         public virtual DbSet<View_Swipe_Double> View_Swipe_Doubles { get; set; }
 
+        public virtual DbSet<SwipeDouble> SwipeDouble { get; set; }
+
         public virtual DbSet<NavData> NavDatas { get; set; }
 
         public virtual DbSet<SwipeSet> SwipeSets { get; set; }
