@@ -24,6 +24,23 @@ $(document).ready(function () {
             console.log(dataList);
            
           
-        }})
+        }
+    })
+
+    $.ajax({
+        async: false,
+        cache: false,
+        type: "post",
+        datatype: "json",
+        url: "/Webpage/SwipeDoubleCheckTypeSelect",
+
+        success: function (data) {
+            CheckTypedata = [];
+            CheckTypedata = JSON.parse(data);
+            console.log(CheckTypedata);
+
+
+        }
+    })
 
 })

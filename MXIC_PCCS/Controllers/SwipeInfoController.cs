@@ -59,6 +59,13 @@ namespace MXIC_PCCS.Controllers
             return str;
         }
 
+        public string InsertSwipe(string AttendTypeSelect, string CheckType, string EmpName, DateTime SwipeTime, float Hour, string WorkShift)
+        {
+            string str = _ISwipeInfo.InsertSwipe(AttendTypeSelect, CheckType, EmpName, SwipeTime, Hour, WorkShift);
+
+            return str;
+        }
+
         public string MxicTest()
         {
             string str = _ISwipeInfo.transform();
@@ -68,7 +75,6 @@ namespace MXIC_PCCS.Controllers
 
         public ActionResult transform(string StartTime,string EndTime,string PoNo)
         {
-
             string responseStr = "日期選擇不完整!";
 
             StringBuilder SB = new StringBuilder();
@@ -79,20 +85,23 @@ namespace MXIC_PCCS.Controllers
                 DateTime start = Convert.ToDateTime(StartTime);
 
                 DateTime end = Convert.ToDateTime(EndTime);
+                
                 //判斷日期區間是否正確
                 var result = DateTime.Compare(start, end);
 
                 if (result != 1)
                 { 
-                _ISwipeInfo.transform2(StartTime, EndTime,PoNo);
+                    _ISwipeInfo.transform2(StartTime, EndTime,PoNo);
 
-                return RedirectToAction("Index", "SwipeInfo");
+                    return RedirectToAction("Index", "SwipeInfo");
                 }
-                else {
-
+                else
+                {
                     responseStr = "日期選擇異常!";
+
                     SB.Clear();
                     SB.AppendFormat("<script>alert('{0}');window.location.href='../ScheduleSetting/Index';</script>", responseStr);
+
                     return Content(SB.ToString());
                 }
             }
@@ -105,12 +114,11 @@ namespace MXIC_PCCS.Controllers
                     return RedirectToAction("Index", "SwipeInfo");
                 }
 
-                    SB.Clear();
+                SB.Clear();
                 SB.AppendFormat("<script>alert('{0}');window.location.href='../ScheduleSetting/Index';</script>", responseStr);
 
                 return Content(SB.ToString());
             }
-
         }
     }
 }

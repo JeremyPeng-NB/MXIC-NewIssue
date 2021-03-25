@@ -87,10 +87,11 @@ if (title == 'MXIC') {
 } else if (title == '刷卡紀錄') {
     tablename = "MXIC_View_Swipe"
     ajaxUrl = "/SwipeInfo/CheckinList"
+    inserturl = "/SwipeInfo/InsertSwipe"
     editDetailUrl = "/SwipeInfo/SwipeInfoDetail"
     editUrl = "/SwipeInfo/EditSwipe"
     //是否出現刪除checkbox
-    multiselect = false;
+    multiselect = true;
 } else if (title == '刷卡警報') {
     tablename = "MXIC_View_Swipe_Double"
     ajaxUrl = "/SwipeInfo/AlarmList"
@@ -640,6 +641,10 @@ function GridData() {
 function insert() {
     if (title == '廠商管理') {
         inputOption('insertInputOption4', dataList2, '', '');
+    } 
+    else if (title == '刷卡紀錄') {
+        inputOption('insertInputOption0', dataList, '', '');
+        inputOption('insertInputOption1', CheckTypedata, '', '');
     }
     else {
         inputOption('insertInputOption2', dataList, '', '');

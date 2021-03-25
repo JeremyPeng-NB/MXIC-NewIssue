@@ -161,6 +161,12 @@ input[type="text"]{
     border-radius: 5px;
     margin: 0px 10px 5px 0;
 }
+input[type="datetime-local"]{
+    width: 130px;
+    height: 35px;
+    border-radius: 5px;
+    margin: 0px 10px 5px 0;
+}
 .inputBox{
     width: 70%;
     padding: 10px 0% 10px 9%;
