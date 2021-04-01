@@ -103,8 +103,8 @@ var navData = [
     { 'name': '班表設定', 'url': '../ScheduleSetting/', 'commonly_used': '1' },
     { 'name': '證照管理', 'url': '../LisenceManagement/', 'commonly_used': '1' },
     { 'name': '刷卡紀錄', 'url': '../SwipeInfo/', 'commonly_used': '1' },
-    { 'name': '班表時間設定', 'url': '../SwipeSet/', 'commonly_used': '1' },
     { 'name': '刷卡警報', 'url': '../SwipeInfo/Alarm', 'commonly_used': '1' },
+    { 'name': '班表時間設定', 'url': '../SwipeSet/', 'commonly_used': '1' },
     { 'name': '匯出報表', 'url': '../ExportPO/', 'commonly_used': '1' }
 ]
 

@@ -22,6 +22,8 @@ namespace MXIC_PCCS.DataUnity.Interface
 
         void transform2(string StartTime, string EndTime,string PoNo);
 
+        bool CheckPO(string PO);
+
 
     }
 }

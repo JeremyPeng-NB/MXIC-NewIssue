@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 
@@ -182,7 +183,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             try
             {
                 //先確認班表有 (View_Swipe會有東西)
-                var CheckSchedule = _db.MXIC_ScheduleSettings.Where(x => x.Date == SwipeTime.Date && x.EmpName == EmpName );
+                var CheckSchedule = _db.MXIC_ScheduleSettings.Where(x => x.Date == SwipeTime.Date && x.EmpName == EmpName);
 
                 //再Insert到刷卡資料去
                 if (CheckSchedule.Any())
@@ -644,6 +645,12 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 }
             }
             _db.SaveChanges();
+        }
+
+        public bool CheckPO(string PO)
+        {
+            var WithPO = _db.MXIC_Quotations.Where(x => x.PoNo == PO).Any();
+            return WithPO;
         }
     }
 }
