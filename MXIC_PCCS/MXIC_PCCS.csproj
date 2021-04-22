@@ -211,7 +211,6 @@
     <Compile Include="Models\QuotationProperty.cs" />
     <Compile Include="Models\ScheduleProperty.cs" />
     <Compile Include="Models\ScheduleSetting.cs" />
-    <Compile Include="Models\SwipeDouble.cs" />
     <Compile Include="Models\SwipeInfo.cs" />
     <Compile Include="Models\SwipeSet.cs" />
     <Compile Include="Models\UserManagement.cs" />

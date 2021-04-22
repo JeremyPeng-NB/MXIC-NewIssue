@@ -55,7 +55,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
 
             public string UserList(string PoNo, DateTime? Date)
             {
-                var _List = _db.SwipeSets.Select(x => new { x.PoNo, x.WorkShift, x.SwipeStartTime, x.SwipeEndTime, x.EditID, x.Date });
+                var _List = _db.SwipeSets.Select(x => new { x.PoNo, x.Date, x.WorkShift, x.SwipeStartTime, x.SwipeEndTime, x.EditID  });
                 
                 if (!string.IsNullOrWhiteSpace(PoNo))
                 {
@@ -72,6 +72,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 }
 
                 string Str = JsonConvert.SerializeObject(_List, Formatting.Indented);
+                Str = Str.Replace("-01T00:00:00", "");
                 return (Str);
             }
 

@@ -128,8 +128,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             }
             else
             {
-                var List = _db.SwipeDouble.Select(x => new { x.PoNo, x.VendorName, x.EmpID, x.CheckType, x.EmpName, x.SwipeTime, x.WorkShift });
-                Str = JsonConvert.SerializeObject(List, Formatting.Indented);
+                Str = "[\r\n  {\r\n    \"PoNo\": \"0000000000\",\r\n    \"VendorName\": \"測試廠商\",\r\n    \"EmpID\": \"00000000\",\r\n    \"CheckType\": \"CheckType\",\r\n    \"EmpName\": \"測試人員\",\r\n    \"SwipeTime\": \"9999-01-01T12:00:00\",\r\n    \"WorkShift\": \"測試班別\"\r\n  }\r\n]";
             }
 
             return (Str);
