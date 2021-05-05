@@ -120,16 +120,17 @@ namespace MXIC_PCCS.Controllers
         {
             List<SelectViewModel> SelectListx = new List<SelectViewModel>();
 
-            var list = _db.SelectLists.Where(x=>x.TableName == TableName).Select(x => new { x.name }).Distinct().OrderBy(x => x.name).ToList();
-            //var list = _db.SwipeInfoSelects.Select(x => new { x.name }).Distinct().OrderBy(x => x.name).ToList();
 
+            //var list = _db.SelectLists.Where(x=>x.TableName == TableName).Select(x => new { x.name }).Distinct().OrderBy(x => x.name).ToList();
+            //var list = _db.SwipeInfoSelects.Select(x => new { x.name }).Distinct().OrderBy(x => x.name).ToList();
+            var list = _db.MXIC_LisenceManagements.Select(x => new { x.LicName }).Distinct().OrderBy(x => x.LicName).ToList();//證照名稱SelectList
 
             foreach (var item in list)
             {
                 var SelectItem = new SelectViewModel()
                 {
-                    name = item.name,
-                    value = item.name
+                    name = item.LicName,
+                    value = item.LicName
                 };
                 SelectListx.Add(SelectItem);
             }
