@@ -45,10 +45,10 @@ namespace MXIC_PCCS.Controllers
                     responseStr = ExportPO(PONumber, Month);
                     if (responseStr == "寫入成功")
                     {
-                        string filepath = Server.MapPath("~/Content/計價單.xlsx");
+                        string filepath = Server.MapPath("~/Content/PDF/計價單.pdf");
                         string filename = Path.GetFileName(filepath);
                         Stream iStream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        return File(iStream, "application/xlsx", filename);
+                        return File(iStream, "application/pdf", filename);
                     }
                     else
                     {

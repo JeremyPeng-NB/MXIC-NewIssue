@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Configuration;
+using Spire.Xls;
 
 namespace MXIC_PCCS.DataUnity.BusinessUnity
 {
@@ -64,6 +65,9 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             using (var Excel = new ExcelPackage(DownloadPath))
             {
                 ExcelWorksheet WorkSheet = Excel.Workbook.Worksheets["PO報價"];
+                WorkSheet.PrinterSettings.FitToPage = true;
+                WorkSheet.PrinterSettings.FitToHeight = 0;
+                WorkSheet.PrinterSettings.FitToWidth = 1;
 
                 //Step 1-1.把數量寫入計價單   
                 foreach (var QuotationItem in QuotationList)
@@ -163,6 +167,17 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 //WorkSheet.Cells[9, 1].Value = Date.ToString("yyyy/MM");
 
                 Excel.Save();
+
+                MemoryStream fileStream = new MemoryStream();
+                using (var workbook = new Workbook())
+                {
+
+                    workbook.LoadFromStream(Excel.Stream as MemoryStream);
+                    workbook.SaveToStream(fileStream, Spire.Xls.FileFormat.PDF);
+                    workbook.SaveToFile(ConfigurationManager.AppSettings["DowloadPDF"]);
+                }
+                Excel.Dispose();
+                fileStream.Position = 0;
             }
         }
 

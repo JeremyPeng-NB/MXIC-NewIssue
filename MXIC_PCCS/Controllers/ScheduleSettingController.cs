@@ -73,7 +73,8 @@ namespace MXIC_PCCS.Controllers
             {
                 //"2020", "09", "4500090268"
                 MemoryStream OutputStream = _IScheduleSetting.ExportSchedul(Date.Split('-')[0], Date.Split('-')[1], PoNo);
-                return File(OutputStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "班表產出.xlsx");
+                return File(OutputStream, "application/pdf", "班表產出.pdf");
+                //return File(OutputStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "班表產出.xlsx");
             }
             else
             {

@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
 using OfficeOpenXml.Style;
+using Spire.Xls;
 
 namespace MXIC_PCCS.DataUnity.BusinessUnity
 {
@@ -196,6 +197,10 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             ExcelPackage ep = new ExcelPackage();
             ep.Workbook.Worksheets.Add("班表產出");
             ExcelWorksheet sheet = ep.Workbook.Worksheets["班表產出"];
+            sheet.PrinterSettings.FitToPage = true; //開啟縮放成適當比例來配合列印的頁面
+            sheet.PrinterSettings.FitToHeight = 0; //頁面縮放比例:高
+            sheet.PrinterSettings.FitToWidth = 1; //頁面縮放比例:寬
+            sheet.PrinterSettings.Orientation = eOrientation.Landscape;//頁面橫向
 
             var rowStart = 1; //設定起始行
             var colStart = 1; //設定起始欄
@@ -474,7 +479,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             sheet.Cells[sheet.Dimension.End.Row + 1, 1, sheet.Dimension.End.Row + 6, sheet.Dimension.End.Column].Merge = true;
             //插入圖片
             Image img = Image.FromFile(HttpContext.Current.Server.MapPath(@"~\Content\image\產出班表圖例.png"));
-            ExcelPicture pic = sheet.Drawings.AddPicture("圖例", img);
+            OfficeOpenXml.Drawing.ExcelPicture pic = sheet.Drawings.AddPicture("圖例", img);
             pic.From.Row = sheet.Dimension.End.Row + 1;
             pic.From.Column = 20;
             //pic.SetPosition(sheet.Dimension.End.Row + 1, 1);
@@ -497,7 +502,13 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             }
 
             MemoryStream fileStream = new MemoryStream();
-            ep.SaveAs(fileStream);
+          //ep.SaveAs(fileStream);
+            ep.Save();
+            using (var workbook = new Workbook())
+            {
+                workbook.LoadFromStream(ep.Stream as MemoryStream);
+                workbook.SaveToStream(fileStream, Spire.Xls.FileFormat.PDF);
+            }
             ep.Dispose();
             fileStream.Position = 0;
             return fileStream;
