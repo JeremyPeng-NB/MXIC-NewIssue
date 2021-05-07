@@ -107,8 +107,16 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                         DeleteID = Guid.NewGuid()
                     };
 
-                    _db.MXIC_LisenceManagements.Add(AddLisenceItem);
+                    var AddSelectList = new Models.SelectList() //2021/05/06 新增證照至dropdownlist
+                    {
+                        id = Guid.NewGuid(),
+                        name = LicName,
+                        value = LicName,
+                        TableName = "MXIC_LisenceManagement"
+                    };
 
+                    _db.MXIC_LisenceManagements.Add(AddLisenceItem);
+                    _db.SelectLists.Add(AddSelectList);
                     _db.SaveChanges();
 
                     MessageStr = "新增成功";
