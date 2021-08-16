@@ -157,6 +157,92 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 #endregion
                         }
                     }
+                    else
+                    {
+                        switch (QuotationItem.PoClassID)
+                        {
+                            #region 把數量為0的儲存格隱藏
+                            case "10-1":
+                                WorkSheet.Row(9).Hidden = true;
+                                break;
+                            case "10-2":
+                                WorkSheet.Row(10).Hidden = true;
+                                break;
+                            case "10-3":
+                                WorkSheet.Row(11).Hidden = true;
+                                break;
+                            case "10-4":
+                                WorkSheet.Row(12).Hidden = true;
+                                break;
+                            case "10-5":
+                                WorkSheet.Row(13).Hidden = true;
+                                break;
+                            case "10-6":
+                                WorkSheet.Row(14).Hidden = true;
+                                break;
+                            case "10-7":
+                                WorkSheet.Row(15).Hidden = true;
+                                break;
+                            case "10-8":
+                                WorkSheet.Row(16).Hidden = true;
+                                break;
+                            case "10-9":
+                                WorkSheet.Row(17).Hidden = true;
+                                break;
+                            case "10-10":
+                                WorkSheet.Row(18).Hidden = true;
+                                break;
+                            case "10-11":
+                                WorkSheet.Row(19).Hidden = true;
+                                break;
+                            case "10-12":
+                                WorkSheet.Row(20).Hidden = true;
+                                break;
+                            case "10-13":
+                                WorkSheet.Row(21).Hidden = true;
+                                break;
+                            case "10-14":
+                                WorkSheet.Row(22).Hidden = true;
+                                break;
+                            case "10-15":
+                                WorkSheet.Row(23).Hidden = true;
+                                break;
+                            case "10-16":
+                                WorkSheet.Row(24).Hidden = true;
+                                break;
+                            case "10-17":
+                                WorkSheet.Row(25).Hidden = true;
+                                break;
+                            case "10-18":
+                                WorkSheet.Row(26).Hidden = true;
+                                break;
+                            case "10-19":
+                                WorkSheet.Row(27).Hidden = true;
+                                break;
+                            case "10-20":
+                                WorkSheet.Row(28).Hidden = true;
+                                break;
+                            case "10-21":
+                                WorkSheet.Row(29).Hidden = true;
+                                break;
+                            case "10-22":
+                                WorkSheet.Row(30).Hidden = true;
+                                break;
+                            case "10-23":
+                                WorkSheet.Row(31).Hidden = true;
+                                break;
+                            case "10-24":
+                                WorkSheet.Row(32).Hidden = true;
+                                break;
+                            case "10-25":
+                                WorkSheet.Row(33).Hidden = true;
+                                break;
+                            default:
+                                //WorkSheet.AutoFilter.ApplyFilter();
+                                break;
+                                #endregion
+                        }
+                    }
                 }
 
                 //Vendor
@@ -171,7 +257,6 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 MemoryStream fileStream = new MemoryStream();
                 using (var workbook = new Workbook())
                 {
-
                     workbook.LoadFromStream(Excel.Stream as MemoryStream);
                     workbook.SaveToStream(fileStream, Spire.Xls.FileFormat.PDF);
                     workbook.SaveToFile(ConfigurationManager.AppSettings["DowloadPDF"]);
