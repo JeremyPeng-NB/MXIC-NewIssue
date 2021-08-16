@@ -238,7 +238,6 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 WorkSheet.Row(33).Hidden = true;
                                 break;
                             default:
-                                //WorkSheet.AutoFilter.ApplyFilter();
                                 break;
                                 #endregion
                         }
