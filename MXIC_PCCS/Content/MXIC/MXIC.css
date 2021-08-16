@@ -360,7 +360,7 @@ thead {
 }
 
 tbody {
-    height: 300px;
+    height: 35px;
     overflow: auto;
     margin-top: 0px;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -757,6 +757,9 @@ svg {
     justify-content: center;
     align-items: flex-end;
     padding: 3% 2%;
+}
+.ui-jqgrid-hdiv {
+    height: 40px !important;
 }
 
 @media screen and (min-width: 1367px) and (max-width: 1600px) {
