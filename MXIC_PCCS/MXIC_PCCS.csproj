@@ -287,6 +287,12 @@
     <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\Spire.License.dll" />
+    <Content Include="bin\Spire.License.xml" />
+    <Content Include="bin\Spire.Pdf.dll" />
+    <Content Include="bin\Spire.Pdf.xml" />
+    <Content Include="bin\Spire.XLS.dll" />
+    <Content Include="bin\Spire.XLS.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
     <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
