@@ -57,7 +57,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
         #endregion
         public string CheckinList(string VendorName, string EmpID, string EmpName, DateTime? StartTime, DateTime? EndTime, string AttendTypeSelect)
         {
-            var _List = _db.MXIC_View_Swipes.Select(x => new { x.PoNo, x.VendorName, x.EmpID, x.CheckType, x.EmpName, x.SwipeTime, x.EditID, x.AttendType, x.WorkShift }).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
+            var _List = _db.MXIC_View_Swipes.Select(x => new { x.PoNo, x.VendorName, x.EmpID, x.CheckType, x.EmpName, x.SwipeTime, x.EditID, x.AttendType, x.WorkShift, x.DeleteID }).OrderBy(x => new { x.PoNo, x.EmpID, x.SwipeTime });
 
             if (!string.IsNullOrWhiteSpace(VendorName))
             {
@@ -215,6 +215,44 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 Str = "新增失敗!" + ex.ToString();
             }
             return (Str);
+        }
+
+        public string DeleteSwipe(string DeleteID)
+        {
+            string MessageStr = "刪除失敗!";
+
+            string[] DeleteIDList = null;
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(DeleteID))
+                {
+                    DeleteID = DeleteID.Replace("jqg_grid_gb1_", "").TrimEnd(',');
+
+                    DeleteIDList = DeleteID.Split(',');
+
+                    foreach (var item in DeleteIDList)
+                    {
+                        Models.SwipeInfo DeleteSwipeData = _db.MXIC_SwipeInfos.Where(x => x.DeleteID.ToString() == item).FirstOrDefault();
+
+                        _db.MXIC_SwipeInfos.Remove(DeleteSwipeData);
+                    }
+
+                    _db.SaveChanges();
+
+                    MessageStr = "刪除成功!";
+                }
+                else
+                {
+                    MessageStr = "刪除失敗!請勾選刪除資料。";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageStr = ex.ToString();
+            }
+
+            return (MessageStr);
         }
 
         public string transform()
@@ -377,6 +415,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             SwipeIN.SwipeTime = ENTRANCE;
                             SwipeIN.EmpName = item.EmpName;
                             SwipeIN.EditID = Guid.NewGuid();
+                            SwipeIN.DeleteID = Guid.NewGuid();
                             SwipeIN.SwipID = Guid.NewGuid();
                             SwipeIN.Hour = 8;
                             SwipeIN.AttendType = InAttendType;
@@ -389,6 +428,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             SwipeOUT.SwipeTime = EXIT;
                             SwipeOUT.EmpName = item.EmpName;
                             SwipeOUT.EditID = Guid.NewGuid();
+                            SwipeOUT.DeleteID = Guid.NewGuid();
                             SwipeOUT.SwipID = Guid.NewGuid();
                             SwipeOUT.Hour = 8;
                             SwipeOUT.AttendType = OutAttendType;
@@ -406,6 +446,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             SwipeIN.SwipeTime = ENTRANCE;
                             SwipeIN.EmpName = item.EmpName;
                             SwipeIN.EditID = Guid.NewGuid();
+                            SwipeIN.DeleteID = Guid.NewGuid();
                             SwipeIN.SwipID = Guid.NewGuid();
                             SwipeIN.Hour = 0;
                             SwipeIN.AttendType = InAttendType;
@@ -418,6 +459,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             SwipeOUT.SwipeTime = EXIT;
                             SwipeOUT.EmpName = item.EmpName;
                             SwipeOUT.EditID = Guid.NewGuid();
+                            SwipeOUT.DeleteID = Guid.NewGuid();
                             SwipeOUT.SwipID = Guid.NewGuid();
                             SwipeOUT.Hour = 0;
                             SwipeOUT.AttendType = OutAttendType;
@@ -515,6 +557,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 SwipeIN.SwipeTime = ENTRANCE;
                                 SwipeIN.EmpName = item.EmpName;
                                 SwipeIN.EditID = Guid.NewGuid();
+                                SwipeIN.DeleteID = Guid.NewGuid();
                                 SwipeIN.SwipID = Guid.NewGuid();
                                 SwipeIN.Hour = 0;
                                 SwipeIN.AttendType = InAttendType;
@@ -531,6 +574,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 SwipeIN.SwipeTime = ENTRANCE;
                                 SwipeIN.EmpName = item.EmpName;
                                 SwipeIN.EditID = Guid.NewGuid();
+                                SwipeIN.DeleteID = Guid.NewGuid();
                                 SwipeIN.SwipID = Guid.NewGuid();
                                 SwipeIN.Hour = 0;
                                 SwipeIN.AttendType = InAttendType;
@@ -616,6 +660,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 SwipeOUT.SwipeTime = EXIT;
                                 SwipeOUT.EmpName = item.EmpName;
                                 SwipeOUT.EditID = Guid.NewGuid();
+                                SwipeOUT.DeleteID = Guid.NewGuid();
                                 SwipeOUT.SwipID = Guid.NewGuid();
                                 SwipeOUT.Hour = 0;
                                 SwipeOUT.AttendType = OutAttendType;
@@ -632,6 +677,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 SwipeOUT.SwipeTime = EXIT;
                                 SwipeOUT.EmpName = item.EmpName;
                                 SwipeOUT.EditID = Guid.NewGuid();
+                                SwipeOUT.DeleteID = Guid.NewGuid();
                                 SwipeOUT.SwipID = Guid.NewGuid();
                                 SwipeOUT.Hour = 0;
                                 SwipeOUT.AttendType = OutAttendType;

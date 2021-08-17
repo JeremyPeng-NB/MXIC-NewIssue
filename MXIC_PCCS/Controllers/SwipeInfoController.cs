@@ -63,6 +63,13 @@ namespace MXIC_PCCS.Controllers
             return str;
         }
 
+        public string DeleteSwipe(string DeleteID)
+        {
+            string str = _ISwipeInfo.DeleteSwipe(DeleteID);
+
+            return str;
+        }
+
         public string MxicTest()
         {
             string str = _ISwipeInfo.transform();

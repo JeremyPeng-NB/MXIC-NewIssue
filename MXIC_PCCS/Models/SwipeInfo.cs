@@ -5,12 +5,15 @@ namespace MXIC_PCCS.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+
     [Table("SwipeInfo")]
     public partial class SwipeInfo
     {
         [Key]
         public Guid SwipID { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string valid { get; set; }
 
         [Required]
@@ -22,8 +25,10 @@ namespace MXIC_PCCS.Models
         public string CheckType { get; set; }
 
         public DateTime? SwipeTime { get; set; }
-      
+
         public Guid EditID { get; set; }
+
+        public Guid? DeleteID { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -31,6 +36,7 @@ namespace MXIC_PCCS.Models
 
         public double Hour { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime WORK_DATETIME { get; set; }
     }
 }

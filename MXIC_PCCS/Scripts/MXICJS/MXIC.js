@@ -90,6 +90,7 @@ if (title == 'MXIC') {
     inserturl = "/SwipeInfo/InsertSwipe"
     editDetailUrl = "/SwipeInfo/SwipeInfoDetail"
     editUrl = "/SwipeInfo/EditSwipe"
+    deleteurl = "/SwipeInfo/DeleteSwipe"
     //是否出現刪除checkbox
     multiselect = true;
 } else if (title == '刷卡警報') {

@@ -56,5 +56,7 @@ namespace MXIC_PCCS.Models
         [Column(Order = 9)]
         [StringLength(50)]
         public string WorkShift { get; set; }
+
+        public Guid? DeleteID { get; set; }
     }
 }

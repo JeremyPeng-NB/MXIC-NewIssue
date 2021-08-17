@@ -18,6 +18,8 @@ namespace MXIC_PCCS.DataUnity.Interface
 
         string InsertSwipe(string AttendTypeSelect, string CheckType, string EmpName, DateTime SwipeTime, double Hour, string WorkShift);
 
+        string DeleteSwipe(string DeleteID);
+
         string transform();
 
         void transform2(string StartTime, string EndTime,string PoNo);
