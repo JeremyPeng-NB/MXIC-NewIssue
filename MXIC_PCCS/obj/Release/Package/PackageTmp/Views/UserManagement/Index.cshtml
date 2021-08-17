@@ -2,31 +2,26 @@
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>人員管理</title>
-
+    <title>人員管理</title>
 
     @*//請按照順訊*@
     <link href="~/Content/MXIC/font-awesome.min.css" rel="stylesheet" />
-
     <link href="~/Content/MXIC/MXIC.css" rel="stylesheet" />
+
     @*自己寫的js放這裡*@
     <script src="~/Scripts/MXICJS/jquery-3.5.1.js"></script>
-
     <script src="~/Scripts/MXICJS/MXIC.js"></script>
-    @*自己寫的js放這裡*@
 
-    
+    @*自己寫的js放這裡*@
     <script src="~/Scripts/MXICJS/jquery.jqgrid.min.js"></script>
 </head>
-
-<body><input type="hidden" id="UserID" value="@ViewBag.ID">
+<body>
+    <input type="hidden" id="UserID" value="@ViewBag.ID">
     <div class="head cover">
         <div class="banner"></div>
         <div class="navber">
@@ -97,7 +92,6 @@
                 </div>
             </div>
         </div>
-
         <div class="popEditBox popUp hidden">
             <div class="box">
                 <div class="popUpHead">
@@ -115,9 +109,8 @@
         @Html.Partial("~/Views/Webpage/_PartialSetting.cshtml")
     </div>
     <div class="footer cover">
-        <p>© 2020 -YU-CHEN System Technology</p>
+        <p>© 2020 -YU-CHEN System Technology / 建議瀏覽器版本 Chrome 86.0 以上 解析度 1440 x 900</p>
     </div>
 </body>
-
 </html>
 

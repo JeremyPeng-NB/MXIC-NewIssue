@@ -11,7 +11,7 @@ var multiselect;
 var navUrl = '.../api/api-1';
 var title = document.title;
 if (title == 'MXIC') {
- 
+
 } else if (title == '人員管理') {
     //搜尋url這個要先寫
     ajaxUrl = "/UserManagement/UserList"
@@ -26,7 +26,7 @@ if (title == 'MXIC') {
     //table名稱
     tablename = "MXIC_UserManagement"
     //是否出現刪除checkbox
-    multiselect=true;
+    multiselect = true;
 } else if (title == '部門管理') {
     //搜尋url這個要先寫
     ajaxUrl = '/DepartmentManagement/SearchDepToVen'
@@ -34,11 +34,9 @@ if (title == 'MXIC') {
     deleteurl = "/DepartmentManagement/DeleteDepToVen"
     //table名稱
     tablename = "MXIC_DepartmentManagement"
-     //是否出現刪除checkbox
-    multiselect=true;
+    //是否出現刪除checkbox
+    multiselect = true;
 } else if (title == '廠商管理') {
-
-
     //搜尋url這個要先寫
     ajaxUrl = "/VendorManagement/VendorList"
     //編輯資料取的url
@@ -51,32 +49,26 @@ if (title == 'MXIC') {
     inserturl = "/VendorManagement/AddVendor"
     //table名稱
     tablename = "MXIC_VendorManagement"
-     //是否出現刪除checkbox
-    multiselect=true;
+    //是否出現刪除checkbox
+    multiselect = true;
 } else if (title == '報價單') {
-
-
     //搜尋url這個要先寫
     ajaxUrl = "/Quotation/SearchQuotation"
-      //刪除url
-      deleteurl = "/Quotation/DelQuotation"
+    //刪除url
+    deleteurl = "/Quotation/DelQuotation"
     //table名稱
     tablename = "MXIC_Quotation"
- //是否出現刪除checkbox
-    multiselect=false;
-
-
+    //是否出現刪除checkbox
+    multiselect = false;
 } else if (title == '班表設定') {
     //搜尋url這個要先寫
     ajaxUrl = "/ScheduleSetting/ScheduleList"
-
-       //刪除url
-       deleteurl = "/ScheduleSetting/DelSchedule"
+    //刪除url
+    deleteurl = "/ScheduleSetting/DelSchedule"
     //table名稱
     tablename = "MXIC_ScheduleSetting"
-
-     //是否出現刪除checkbox
-     multiselect=false;
+    //是否出現刪除checkbox
+    multiselect = false;
 } else if (title == '證照管理') {
     //搜尋url這個要先寫
     ajaxUrl = "/LisenceManagement/SearchLisence"
@@ -90,19 +82,30 @@ if (title == 'MXIC') {
     inserturl = "/LisenceManagement/AddLisence"
     //table名稱
     tablename = "MXIC_LisenceManagement"
-     //是否出現刪除checkbox
-     multiselect=true;
+    //是否出現刪除checkbox
+    multiselect = true;
 } else if (title == '刷卡紀錄') {
     tablename = "MXIC_View_Swipe"
     ajaxUrl = "/SwipeInfo/CheckinList"
+    inserturl = "/SwipeInfo/InsertSwipe"
     editDetailUrl = "/SwipeInfo/SwipeInfoDetail"
     editUrl = "/SwipeInfo/EditSwipe"
-     //是否出現刪除checkbox
-     multiselect=false;
+    deleteurl = "/SwipeInfo/DeleteSwipe"
+    //是否出現刪除checkbox
+    multiselect = true;
+} else if (title == '刷卡警報') {
+    tablename = "MXIC_View_Swipe_Double"
+    ajaxUrl = "/SwipeInfo/AlarmList"
+    //是否出現刪除checkbox
+    multiselect = false;
 } else if (title == '匯出計價單') {
-    
-    tablename="MXIC_ExportPO"
-   
+    tablename = "MXIC_ExportPO"
+} else if (title == '班別時間設定') {
+    tablename = "MXIC_SwipeSet"
+    ajaxUrl = "/SwipeSet/UserList"
+    editDetailUrl = "/SwipeSet/EditTimeDetail",
+    editUrl = "/SwipeSet/EditTime"
+    multiselect = false;
 }
 //dataList
 // var dataList = [
@@ -124,6 +127,8 @@ var navData = [
     { 'name': '班表設定', 'url': '../ScheduleSetting/', 'commonly_used': '1' },
     { 'name': '證照管理', 'url': '../LisenceManagement/', 'commonly_used': '1' },
     { 'name': '刷卡紀錄', 'url': '../SwipeInfo/', 'commonly_used': '1' },
+    { 'name': '刷卡警報', 'url': '../SwipeInfo/Alarm', 'commonly_used': '1' },
+    { 'name': '班別時間設定', 'url': '../SwipeSet/', 'commonly_used': '1' },
     { 'name': '匯出報表', 'url': '../ExportPO/', 'commonly_used': '1' }
 ]
 
@@ -203,32 +208,32 @@ $.ajax({
     // error: function () {
     //     alert('表單查詢失敗，目前為範例資料')
     // },
-    success: function (data) {
-        mydata = [];
+            success: function (data) {
+        mydata =[];
         mydata = JSON.parse(data);
 
     }
-})
+    })
 
 // 取得查詢AJAX查詢條件
 var AjaxSelect = $.map(inputGenerate, function (item, index) {
     if (item.Generate == '1') {
         return item.COLUMN_NAME
     }
-})
+    })
 
 
 var AjaxInsert = $.map(inputGenerate, function (item, index) {
     if (item.PopGenerate == '1') {
         return item.COLUMN_NAME
     }
-})
+    })
 
 var AjaxEdit = $.map(inputGenerate, function (item, index) {
     if (item.PopGenerate == '1' && item.EditPopGenerate !== '0') {
         return item.COLUMN_NAME
     }
-})
+    })
 
 
 //------------------------動態生成---------------------
@@ -303,7 +308,7 @@ $(document).ready(function () {
     $('.DelBtn').attr("disabled", true);
 
     UserID = $('#UserID').val();
-    Admin="";
+    Admin = "";
 
     $.ajax({
         async: false,
@@ -313,20 +318,19 @@ $(document).ready(function () {
         url: '/Webpage/Admin',
         data: { UserID: UserID },
         success: function (data) {
-            Admin="";
-            Admin=data;
-            if(Admin=="false")
-            {   multiselect=false;
+            Admin = "";
+            Admin = data;
+            if (Admin == "false") {
+                multiselect = false;
                 $('.Manager').attr("style", "display:none;");
-            }else if(Admin=="true")
-            {
+            } else if (Admin == "true") {
                 $('.SuperAdmin').attr("style", "display:none;");
 
-            }          
+            }
         }
     })
 
-    
+
 
 
     $('.title').html(title);
@@ -339,20 +343,21 @@ $(document).ready(function () {
         } else {
             $('.inputBox').append('<input type="' + GenerateTypeResult[i] + '" autocomplete="off" name="seachTextInput" placeholder="' + GenerateResult[i] + '" required="required" />')
             $('input[type=select]').replaceWith(GenerateResult[i] + '<input  onfocus=this.value="" type="text" autocomplete="off" name="seachTextInput" id="" class="editInputOption" list="seachInputOption' + [i] + '"><datalist id="seachInputOption' + [i] + '"></datalist>')
-            
+
         }
     };
- 
+
     //畫面select選單資料
     if (title == '廠商管理') {
         inputOption('seachInputOption1', dataList, '', '');
-        inputOption('seachInputOption4' , dataList2, '', '');}
-        else{
-     for (i = 0; i < GenerateResult.length; i++) {
-         if (GenerateTypeResult[i] == "select") {
-             inputOption('seachInputOption' + [i], dataList, '', '');
-         }
-     }
+        inputOption('seachInputOption4', dataList2, '', '');
+    }
+    else {
+        for (i = 0; i < GenerateResult.length; i++) {
+            if (GenerateTypeResult[i] == "select") {
+                inputOption('seachInputOption' + [i], dataList, '', '');
+            }
+        }
     }
     //動態生成新增Pop INPUT
     inputGenerate('insertPopUpContant', PopGenerateResult, PopGenerateTypeResult, 'insertTextInput');
@@ -362,21 +367,20 @@ $(document).ready(function () {
 
     //彈跳視窗 input生成
     function inputGenerate(location, result, resultType, inputname) {
-        if(location=='insertPopUpContant')
-        {
-        var ClassName='insertInputOption';
-        }else{var ClassName='editInputOption';}
+        if (location == 'insertPopUpContant') {
+            var ClassName = 'insertInputOption';
+        } else { var ClassName = 'editInputOption'; }
         $('.' + location).html('');
         for (i = 0; i < result.length; i++) {
 
             $('.' + location).append('<div class="PopSeachBox" stlye="display:flex;"><label>' + result[i] + '</label><input type="' + resultType[i] + '" autocomplete="off" name="' + inputname + '" placeholder="' + result[i] + '" required="required" /></div>')
-            $('input[type=select]').replaceWith('</label><input  type="text" autocomplete="off" onfocus=this.value=""  name="' + inputname + '" id="editPopInput' + i + '" class="'+ClassName+'" list="'+ClassName + [i] + '"><datalist id="'+ClassName + [i] + '"></datalist>')
-           
+            $('input[type=select]').replaceWith('</label><input  type="text" autocomplete="off" onfocus=this.value=""  name="' + inputname + '" id="editPopInput' + i + '" class="' + ClassName + '" list="' + ClassName + [i] + '"><datalist id="' + ClassName + [i] + '"></datalist>')
+
         };
     }
 
 
-    
+
 
     //指定 下拉選單選項
     // function inputOption(inputID, DT, PrefixValue, PrefixText) {
@@ -426,15 +430,15 @@ $(document).ready(function () {
 
             testdata = { name: testA[i], index: testA[i], width: gridColume, align: "center", formatter: CheckBox }
 
-        } else if (testb == 'DeleteBtn'&&(Admin=="true"||Admin=="SuperAdmin")) {
+        } else if (testb == 'DeleteBtn' && (Admin == "true" || Admin == "SuperAdmin")) {
             //hidden: true 記得加入
-            testdata = { name: testA[i], index: testA[i], width: gridColume * 0.5, align: "center", key : true, formatter: DelCheckBox, hidden: true}
+            testdata = { name: testA[i], index: testA[i], width: gridColume * 0.5, align: "center", key: true, formatter: DelCheckBox, hidden: true }
 
-        } else if (testb == 'EditBtn'&&(Admin=="true"||Admin=="SuperAdmin")) {
+        } else if (testb == 'EditBtn' && (Admin == "true" || Admin == "SuperAdmin")) {
 
             testdata = { name: testA[i], index: testA[i], width: gridColume * 0.7, align: "center", formatter: EditBtn }
 
-        } else if (testb == 'Hidden'||(testb == 'EditBtn'&&Admin=="false")||(testb == 'DeleteBtn'&&Admin=="false")) {
+        } else if (testb == 'Hidden' || (testb == 'EditBtn' && Admin == "false") || (testb == 'DeleteBtn' && Admin == "false")) {
 
             testdata = { name: testA[i], index: testA[i], width: gridColume * 0.5, align: "center", hidden: true }
 
@@ -453,30 +457,30 @@ $(document).ready(function () {
         testArea.push(testdata)
     }
 
-   
-        //Loading
-        $('.loading').addClass('hidden');
-        $('.tableContant').removeClass('hidden').addClass('show')
 
-        //表格
-        $("#grid").jqGrid({
-            datatype: "local",
-            data: mydata,
-            colNames: RemarksResult,
-            colModel: testArea,
-            height: "100%",
-            guiStyle: "bootstrap4",
-            iconSet: "fontAwesome",
-            pageSize: "10",
-            idPrefix: "gb1_",
-            rownumbers: true,
-            sortname: "invdate",
-            sortorder: "desc",
-            pager: true,
-            rowNum: pageRow,
-            multiselect: multiselect,
+    //Loading
+    $('.loading').addClass('hidden');
+    $('.tableContant').removeClass('hidden').addClass('show')
+
+    //表格
+    $("#grid").jqGrid({
+        datatype: "local",
+        data: mydata,
+        colNames: RemarksResult,
+        colModel: testArea,
+        height: "100%",
+        guiStyle: "bootstrap4",
+        iconSet: "fontAwesome",
+        pageSize: "10",
+        idPrefix: "gb1_",
+        rownumbers: true,
+        sortname: "invdate",
+        sortorder: "desc",
+        pager: true,
+        rowNum: pageRow,
+        multiselect: multiselect,
         //     onSelectRow: function (rowId, status, e) {
-           
+
         //     alert("選一個")
         //     },
         // //点击题头的checkbox按钮，一键多选
@@ -484,32 +488,30 @@ $(document).ready(function () {
         //         alert("選全部")
         //     },
         //     //multiboxonly=true,
-            loadComplete: function () {
-                //获取列表数据
-                var ids = $("#grid").jqGrid("getDataIDs");
-                var rowDatas = $("#grid").jqGrid("getRowData");
-                for (var i = 0; i < rowDatas.length; i++) {
-                    var rowData = rowDatas[i];
-                    var electricityCondition = rowData.AttendType;
-                    if (electricityCondition == '異常'||electricityCondition == '曠職')
-                        $("#" + ids[i]).find("td").css({ "background-color": "#ff4040", "color": "white" });
+        loadComplete: function () {
+            //获取列表数据
+            var ids = $("#grid").jqGrid("getDataIDs");
+            var rowDatas = $("#grid").jqGrid("getRowData");
+            for (var i = 0; i < rowDatas.length; i++) {
+                var rowData = rowDatas[i];
+                var electricityCondition = rowData.AttendType;
+                if (electricityCondition == '異常' || electricityCondition == '曠職')
+                    $("#" + ids[i]).find("td").css({ "background-color": "#ff4040", "color": "white" });
 
-                    var electricityCondition_LisenceDiff = new Date(rowData.EndDate);
-                    var Today = new Date();
-                    var DateDiff = parseInt(Math.abs(Today - electricityCondition_LisenceDiff)) / 86400000;
+                var electricityCondition_LisenceDiff = new Date(rowData.EndDate);
+                var Today = new Date();
+                var DateDiff = parseInt(Math.abs(Today - electricityCondition_LisenceDiff)) / 86400000;
 
-                    if (DateDiff < 90)
-                    {  
-                        $("#" + ids[i]).find("td").css({ "background-color": "#FF0000","font-weight":"bold" });
-                    }else if(DateDiff < 180)
-                    {
-                        $("#" + ids[i]).find("td").css({ "background-color": "#FFFF37","font-weight":"bold" });
-                    }
-                      
+                if (DateDiff < 90) {
+                    $("#" + ids[i]).find("td").css({ "background-color": "#FF0000", "font-weight": "bold" });
+                } else if (DateDiff < 180) {
+                    $("#" + ids[i]).find("td").css({ "background-color": "#FFFF37", "font-weight": "bold" });
                 }
+
             }
-        });
-  
+        }
+    });
+
     navbarItem(navData);
     iconMenu(navData);
     marquee(marqueeContant);
@@ -541,7 +543,7 @@ function navbarItem(e) {
     for (i = 0; i < arrLength; i++) {
         $('.navber > ul').append('<li><a href="./' + e[i].url + '">' + e[i].name + '</a></li>')
     }
-    if (arrLength <= 9) {
+    if (arrLength <= 10) {
         $('ul > li').css('width', '' + menuBTN + '%');
     } else {
         $('.navber > ul').css('flex-wrap', 'wrap')
@@ -638,21 +640,24 @@ function GridData() {
 }
 //開啟"新增"彈窗
 function insert() {
-    if (title == '廠商管理') 
-    {
+    if (title == '廠商管理') {
         inputOption('insertInputOption4', dataList2, '', '');
+    } 
+    else if (title == '刷卡紀錄') {
+        inputOption('insertInputOption0', dataList, '', '');
+        inputOption('insertInputOption1', CheckTypedata, '', '');
     }
-    else{    
-    inputOption('insertInputOption2', dataList, '', '');
-    inputOption('editInputOption0', dataList, '', '');
-    inputOption('editInputOption2', dataList, '', '');
-}
+    else {
+        inputOption('insertInputOption2', dataList, '', '');
+        inputOption('editInputOption0', dataList, '', '');
+        inputOption('editInputOption2', dataList, '', '');
+    }
 
     $("#insert input").val("");
     $('.insertBox').fadeIn(700);
     $('.cover').removeClass('blur-out').addClass('blur-in')
-   
-   
+
+
 }
 //開啟"刪除"彈窗
 function delect(e) {
@@ -664,20 +669,20 @@ function delect(e) {
 
 //開啟"修改"彈窗
 function edit(e) {
-    if (title == '廠商管理') 
-    {
+    if (title == '廠商管理') {
         inputOption('editInputOption4', dataList2, '', '');
     }
-    else{ 
-    inputOption('editInputOption0', dataList, '', '');
-    inputOption('editInputOption2', dataList, '', '');}
+    else {
+        inputOption('editInputOption0', dataList, '', '');
+        inputOption('editInputOption2', dataList, '', '');
+    }
     $('.popEditBox').fadeIn(700);
     $('.cover').removeClass('blur-out').addClass('blur-in')
 
     EditID = e.id;
 
     EditData(EditID)
-   
+
 
 }
 
@@ -806,7 +811,7 @@ function check() {
     }
     console.log(Insertobj)
     InsertDB()
-  
+
     GridData()
     //清空POP視窗 輸入框數值
     $('.popUpContant > input').val('');
@@ -814,7 +819,7 @@ function check() {
 
 
 function InsertDB() {
-   
+
     $.ajax({
         async: false,
         cache: false,
@@ -899,98 +904,98 @@ function delectCheck() {
     $('.delectBox').fadeOut(1000);
     $('.cover').removeClass('blur-in').addClass('blur-out');
 
-    DeleteID="";
+    DeleteID = "";
 
-    
 
-    $('td[class=td_cbox] *').each(function(){
-        if($(this).is(':checked')){
-            DeleteID+=$(this).attr('id')+",";
-            
+
+    $('td[class=td_cbox] *').each(function () {
+        if ($(this).is(':checked')) {
+            DeleteID += $(this).attr('id') + ",";
+
         }
     });
-  console.log(DeleteID);
+    console.log(DeleteID);
     //下方定義傳遞方式    
-     $.ajax({
-         url: deleteurl,
-         type: "post",
-         dataType: "text",
-         async: false,
+    $.ajax({
+        url: deleteurl,
+        type: "post",
+        dataType: "text",
+        async: false,
         data: { DeleteID: DeleteID },
         success: function (result) {
-             alert(result)
-             GridData()
-         }
-     })
+            alert(result)
+            GridData()
+        }
+    })
 }
 function deleteCheck() {
     $('.delectBox').fadeOut(1000);
     $('.cover').removeClass('blur-in').addClass('blur-out');
-   
+
     seachInputValue = []
-        inputLength = document.querySelectorAll('input[name="seachTextInput"]').length;
-        for (i = 0; i < inputLength; i++) {
+    inputLength = document.querySelectorAll('input[name="seachTextInput"]').length;
+    for (i = 0; i < inputLength; i++) {
 
-            value = document.querySelectorAll('input[name="seachTextInput"]')[i].value;
-            obj = value
-            seachInputValue.push(obj);
-        }
-        console.log(seachInputValue)
-        seachobj = '';
-        for (x = 0; x < AjaxSelect.length; x++) {
+        value = document.querySelectorAll('input[name="seachTextInput"]')[i].value;
+        obj = value
+        seachInputValue.push(obj);
+    }
+    console.log(seachInputValue)
+    seachobj = '';
+    for (x = 0; x < AjaxSelect.length; x++) {
 
-            seachobj += AjaxSelect[x] + '=' + seachInputValue[x] + '&'
+        seachobj += AjaxSelect[x] + '=' + seachInputValue[x] + '&'
 
-        }
-        $(".inputBox input").val("");
-        console.log(seachobj)
+    }
+    $(".inputBox input").val("");
+    console.log(seachobj)
     //下方定義傳遞方式    
-     $.ajax({
-         url: deleteurl,
-         type: "post",
-         dataType: "text",
-         async: false,
+    $.ajax({
+        url: deleteurl,
+        type: "post",
+        dataType: "text",
+        async: false,
         data: seachobj,
         success: function (result) {
-             alert(result)
-             seachobj=[]
-             GridData()
+            alert(result)
+            seachobj = []
+            GridData()
 
-         }
-     })
+        }
+    })
 }
 function deleteScheduleCheck() {
- 
+
     $('.delectBox').fadeOut(1000);
     $('.cover').removeClass('blur-in').addClass('blur-out');
-   
-    var ScheduleDate=$("#Date").val();
-    var SchedulePoNo=$("#PoNo").val();
+
+    var ScheduleDate = $("#Date").val();
+    var SchedulePoNo = $("#PoNo").val();
 
     //下方定義傳遞方式    
-     $.ajax({
-         url: deleteurl,
-         type: "post",
-         dataType: "text",
-         async: false,
-        data: {ScheduleDate:ScheduleDate,SchedulePoNo:SchedulePoNo},
+    $.ajax({
+        url: deleteurl,
+        type: "post",
+        dataType: "text",
+        async: false,
+        data: { ScheduleDate: ScheduleDate, SchedulePoNo: SchedulePoNo },
         success: function (result) {
-             alert(result)
-            
-             GridData()
+            alert(result)
 
-            
+            GridData()
 
-         }
-     })
-     var ScheduleDate=$("#Date").val('');
-     var SchedulePoNo=$("#PoNo").val('');
+
+
+        }
+    })
+    var ScheduleDate = $("#Date").val('');
+    var SchedulePoNo = $("#PoNo").val('');
 }
 
 
 function EditBtn(cellvalue, options, rowObject) {
     if (title == '刷卡紀錄') {
-        if ((Admin=="true"||Admin=="SuperAdmin")) {
+        if ((Admin == "true" || Admin == "SuperAdmin")) {
             return ' <a href="#" id=' + rowObject.EditID + ' class="seachBTN btn-1" style="width:50px" onclick="edit(this)">' + rowObject.AttendType + '</a>';
 
         } else {
@@ -1022,15 +1027,15 @@ function CheckBox(cellvalue, options, rowObject) {
 function DelCheckBox(cellvalue, options, rowObject) {
 
     //判斷ChildGrid是否開啟
-   
-        return '<input type="checkbox" id='+cellvalue+'>';
-   
+
+    return '<input type="checkbox" id=' + cellvalue + '>';
+
 }
 function ResetInput() {
 
     $('.insertPopUpContant').empty();
 
-    
+
     $('.editPopUpContant').empty();
 
     for (i = 0; i < editPopGenerateResult.length; i++) {
@@ -1048,7 +1053,7 @@ function ResetInput() {
     //     }
     // }
 
-  
+
 }
 
 function Setting() {
@@ -1067,11 +1072,11 @@ function Settingcheck() {
         url: '/Webpage/EditPassword',
         type: "post",
         dataType: "text",
-        async: false, 
-        data: { UserID: UserID ,Password:Password},
+        async: false,
+        data: { UserID: UserID, Password: Password },
         success: function (result) {
             alert(result)
-           
+
         }
     })
 
