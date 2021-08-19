@@ -124,7 +124,8 @@ namespace MXIC_PCCS.Controllers
                                     }
                                 }
                             }
-                            Property_ListModel.Add(Property_Model);
+                            if (Property_Model.PoClassID != null)
+                                Property_ListModel.Add(Property_Model);
                         }
                         _IQuotation.ImportQuotation(VendorName, PoNo, Property_ListModel);
                     }
