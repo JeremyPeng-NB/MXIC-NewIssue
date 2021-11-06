@@ -20,6 +20,36 @@
     @*自己寫的js放這裡*@
     
     <script src="~/Scripts/MXICJS/jquery.jqgrid.min.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .body {
+            overflow: hidden;
+        }
+
+        .editBox > a:nth-child(3) {
+            margin-right: 20px;
+        }
+
+        .editBox {
+            position: relative;
+        }
+
+            .editBox > a:nth-child(4) {
+                left: 400px;
+                position: absolute;
+                top: -0px;
+            }
+
+        form[name=form1] {
+            position: absolute;
+            top: 2000px;
+            left: 20000px;
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body><input type="hidden" id="UserID" value="@ViewBag.ID">
@@ -49,6 +79,12 @@
                 <a href="#" class="seachBTN btn-1" onclick="seachBtn()">查詢</a>
                 <a href="#" class="seachBTN btn-1 Manager" onclick="insert()">新增</a>
                 <a href="#" class="seachBTN btn-1 Manager DelBtn" onclick="delect(this)">批次刪除</a>
+                <a href="#" class="seachBTN btn-1 Manager" onclick="DownloadExample()" style="width: 150px;">下載匯入格式</a>
+                <form name='form1' action="@Url.Action("UploadVendor")" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" accept=".xlsx" class="seachBTN btn-1 Manager" style="width: 250px;height: 50px;" />
+                </form>
+                <a href='#' class="seachBTN btn-1 Manager" onclick="openUpfile()">選擇檔案</a>
+                <a href='javascript:document.form1.submit();' class="seachBTN btn-1 Manager">匯入</a>
             </div>
         </div>
         <div class="loading">
@@ -114,5 +150,12 @@
         <p>© 2020 -YU-CHEN System Technology / 建議瀏覽器版本 Chrome 86.0 以上 解析度 1440 x 900</p>
     </div>
 </body>
-
 </html>
+<script>
+    function openUpfile() {
+        $('input[type=file]').click();
+    }
+    function DownloadExample() {
+        window.location = '/VendorManagement/DownloadVendorExample';
+    }
+</script>

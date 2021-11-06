@@ -14,6 +14,10 @@ namespace MXIC_PCCS.Models
 
         [Required]
         [StringLength(50)]
+        public string PoNo { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string valid { get; set; }
 
         [Required]
@@ -28,8 +32,6 @@ namespace MXIC_PCCS.Models
 
         public Guid EditID { get; set; }
 
-        public Guid? DeleteID { get; set; }
-
         [Required]
         [StringLength(50)]
         public string AttendType { get; set; }
@@ -38,5 +40,7 @@ namespace MXIC_PCCS.Models
 
         [Column(TypeName = "date")]
         public DateTime WORK_DATETIME { get; set; }
+
+        public Guid? DeleteID { get; set; }
     }
 }

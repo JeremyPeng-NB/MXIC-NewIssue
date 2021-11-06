@@ -223,5 +223,55 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             return (Str);
 
         }
+
+        #region 20211102 廠商匯入功能
+
+        public string ImportVendor(string PoNo, List<Models.VendorManagement> Property_ListModel)
+        {//PoNo, VendorName, EmpID, EmpName, Shifts
+            string MessageStr = "匯入成功";
+            DateTime ImportTime = DateTime.Now;
+
+            for (int i = 0; i < Property_ListModel.Count; i++)
+            {
+                var AddVendorItem = new Models.VendorManagement()
+                {
+                    VenID = Guid.NewGuid(),
+                    PoNo = PoNo,
+                    VendorName = Property_ListModel[i].VendorName,
+                    EmpID = Property_ListModel[i].EmpID,
+                    EmpName = Property_ListModel[i].EmpName,
+                    DeleteID = Guid.NewGuid(),
+                    EditID = Guid.NewGuid(),
+                    Shifts = Property_ListModel[i].Shifts
+                };
+                _db.MXIC_VendorManagements.Add(AddVendorItem);
+            }
+            _db.SaveChanges();
+
+            return (MessageStr);
+        }
+
+        public string ClearTable(string PoNo)
+        {
+            string MessageStr = "判讀結束!";
+            try
+            {
+                var Rows = _db.MXIC_VendorManagements.Where(x => x.PoNo == PoNo);
+                if (Rows.Count() > 0)
+                {
+                    foreach (var DataRow in Rows)
+                    {
+                        _db.MXIC_VendorManagements.Remove(DataRow);
+                    }
+                    _db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageStr = ex.ToString();
+            }
+            return (MessageStr);
+        }
+        #endregion
     }
 }

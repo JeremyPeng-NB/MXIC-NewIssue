@@ -56,9 +56,9 @@ namespace MXIC_PCCS.Controllers
             return str;
         }
 
-        public string InsertSwipe(string AttendTypeSelect, string CheckType, string EmpName, DateTime SwipeTime, float Hour, string WorkShift)
+        public string InsertSwipe(string PoNo, string AttendTypeSelect, string CheckType, string EmpName, DateTime SwipeTime, float Hour, string WorkShift)
         {
-            string str = _ISwipeInfo.InsertSwipe(AttendTypeSelect, CheckType, EmpName, SwipeTime, Hour, WorkShift);
+            string str = _ISwipeInfo.InsertSwipe(PoNo, AttendTypeSelect, CheckType, EmpName, SwipeTime, Hour, WorkShift);
 
             return str;
         }

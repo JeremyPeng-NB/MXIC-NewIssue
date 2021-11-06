@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MXIC_PCCS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,11 @@ namespace MXIC_PCCS.DataUnity.Interface
         string EditVendorDetail(string EditID);
 
         string Shifts();
+
+
+        string ClearTable(string poNo);
+
+        string ImportVendor(string PoNo, List<VendorManagement> property_ListModel);
     }
 }
 

@@ -176,7 +176,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
             return (str);
         }
 
-        public string InsertSwipe(string AttendTypeSelect, string CheckType, string EmpName, DateTime SwipeTime, double Hour, string WorkShift)
+        public string InsertSwipe(string PoNo, string AttendTypeSelect, string CheckType, string EmpName, DateTime SwipeTime, double Hour, string WorkShift)
         {
             string Str;
             try
@@ -190,6 +190,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                     var InsertSwipeInfo = new Models.SwipeInfo
                     {
                         SwipID = Guid.NewGuid(),
+                        PoNo = PoNo,
                         valid = "true",
                         EmpName = EmpName,
                         CheckType = CheckType,
@@ -197,7 +198,8 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                         EditID = Guid.NewGuid(),
                         AttendType = AttendTypeSelect,
                         Hour = Hour,
-                        WORK_DATETIME = SwipeTime.Date
+                        WORK_DATETIME = SwipeTime.Date,
+                        DeleteID = Guid.NewGuid()
                     };
 
                     _db.MXIC_SwipeInfos.Add(InsertSwipeInfo);
@@ -411,6 +413,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             OutAttendType = "排休";
 
                             var SwipeIN = new Models.SwipeInfo();
+                            SwipeIN.PoNo = item.PoNo;
                             SwipeIN.CheckType = "CHECKIN";
                             SwipeIN.SwipeTime = ENTRANCE;
                             SwipeIN.EmpName = item.EmpName;
@@ -424,6 +427,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             _db.MXIC_SwipeInfos.Add(SwipeIN);
 
                             var SwipeOUT = new Models.SwipeInfo();
+                            SwipeOUT.PoNo = item.PoNo;
                             SwipeOUT.CheckType = "CHECKOUT";
                             SwipeOUT.SwipeTime = EXIT;
                             SwipeOUT.EmpName = item.EmpName;
@@ -442,6 +446,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             OutAttendType = "曠職";
 
                             var SwipeIN = new Models.SwipeInfo();
+                            SwipeIN.PoNo = item.PoNo;
                             SwipeIN.CheckType = "CHECKIN";
                             SwipeIN.SwipeTime = ENTRANCE;
                             SwipeIN.EmpName = item.EmpName;
@@ -455,6 +460,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                             _db.MXIC_SwipeInfos.Add(SwipeIN);
 
                             var SwipeOUT = new Models.SwipeInfo();
+                            SwipeOUT.PoNo = item.PoNo;
                             SwipeOUT.CheckType = "CHECKOUT";
                             SwipeOUT.SwipeTime = EXIT;
                             SwipeOUT.EmpName = item.EmpName;
@@ -553,6 +559,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 }
 
                                 var SwipeIN = new Models.SwipeInfo();
+                                SwipeIN.PoNo = item.PoNo;
                                 SwipeIN.CheckType = "CHECKIN";
                                 SwipeIN.SwipeTime = ENTRANCE;
                                 SwipeIN.EmpName = item.EmpName;
@@ -570,6 +577,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 InAttendType = "異常";
                                 ENTRANCE = item.Date;
                                 var SwipeIN = new Models.SwipeInfo();
+                                SwipeIN.PoNo = item.PoNo;
                                 SwipeIN.CheckType = "CHECKIN";
                                 SwipeIN.SwipeTime = ENTRANCE;
                                 SwipeIN.EmpName = item.EmpName;
@@ -656,6 +664,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 }
 
                                 var SwipeOUT = new Models.SwipeInfo();
+                                SwipeOUT.PoNo = SwipeOUT.PoNo;
                                 SwipeOUT.CheckType = "CHECKOUT";
                                 SwipeOUT.SwipeTime = EXIT;
                                 SwipeOUT.EmpName = item.EmpName;
@@ -673,6 +682,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                                 EXIT = item.Date;
                                 OutAttendType = "異常";
                                 var SwipeOUT = new Models.SwipeInfo();
+                                SwipeOUT.PoNo = item.PoNo;
                                 SwipeOUT.CheckType = "CHECKOUT";
                                 SwipeOUT.SwipeTime = EXIT;
                                 SwipeOUT.EmpName = item.EmpName;

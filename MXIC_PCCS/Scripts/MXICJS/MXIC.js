@@ -465,7 +465,7 @@ $(document).ready(function () {
     //表格
     $("#grid").jqGrid({
         datatype: "local",
-        data: mydata,
+        data: [],//mydata,
         colNames: RemarksResult,
         colModel: testArea,
         height: "100%",
