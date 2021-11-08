@@ -103,6 +103,7 @@ if (title == 'MXIC') {
 } else if (title == '班別時間設定') {
     tablename = "MXIC_SwipeSet"
     ajaxUrl = "/SwipeSet/UserList"
+    inserturl = "/SwipeSet/InsertSwipeSetTime"
     editDetailUrl = "/SwipeSet/EditTimeDetail",
     editUrl = "/SwipeSet/EditTime"
     multiselect = false;

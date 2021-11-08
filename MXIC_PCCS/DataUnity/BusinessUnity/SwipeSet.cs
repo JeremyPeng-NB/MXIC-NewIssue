@@ -76,6 +76,45 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 return (Str);
             }
 
+            public string InsertSwipeSetTime(string PoNo, DateTime Date, string WorkShift, string SwipeStartTime, string SwipeEndTime)
+            {
+                string Str;
+                try
+                {
+                    //先確認
+                    var CheckSwipeSet = _db.SwipeSets.Where(x => x.PoNo == PoNo && x.Date == Date && x.WorkShift == WorkShift);
+
+                    //再Insert
+                    if (!CheckSwipeSet.Any())
+                    {
+                        var InsertSwipeSet = new Models.SwipeSet
+                        {
+                            SwipeSet1 = Guid.NewGuid(),
+                            PoNo = PoNo,
+                            Date = Date,
+                            WorkShift = WorkShift,
+                            SwipeStartTime = SwipeStartTime,
+                            SwipeEndTime = SwipeEndTime,
+                            EditID = Guid.NewGuid()
+                        };
+
+                        _db.SwipeSets.Add(InsertSwipeSet);
+                        _db.SaveChanges();
+
+                        Str = "新增成功!";
+                    }
+                    else
+                    {
+                        Str = "資料重複!";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Str = "新增失敗!" + ex.ToString();
+                }
+                return (Str);
+            }
+
             public string EditTimeDetail(string EditID)
             {
                 string Str = "修改成功";

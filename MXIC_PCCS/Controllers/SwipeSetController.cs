@@ -28,6 +28,13 @@ namespace MXIC_PCCS.Controllers
             return str;
         }
 
+        public string InsertSwipeSetTime(string PoNo, DateTime Date, string WorkShift, string SwipeStartTime, string SwipeEndTime)
+        {
+            string str = _ISwipeSet.InsertSwipeSetTime(PoNo, Date, WorkShift, SwipeStartTime, SwipeEndTime);
+
+            return str;
+        }
+
         public string EditTimeDetail(string EditID)
         {
             string str = _ISwipeSet.EditTimeDetail(EditID);
