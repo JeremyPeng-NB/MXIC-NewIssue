@@ -33,5 +33,7 @@ namespace MXIC_PCCS.Models
         public string SwipeEndTime { get; set; }
 
         public Guid EditID { get; set; }
+
+        public Guid DeleteID { get; set; }
     }
 }

@@ -55,9 +55,9 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
 
             public string UserList(string PoNo, DateTime? Date)
             {
-                var _List = _db.SwipeSets.Select(x => new { x.PoNo, x.Date, x.WorkShift, x.SwipeStartTime, x.SwipeEndTime, x.EditID  });
-                
-                if (!string.IsNullOrWhiteSpace(PoNo))
+            var _List = _db.SwipeSets.Select(x => new { x.PoNo, x.Date, x.WorkShift, x.SwipeStartTime, x.SwipeEndTime, x.EditID, x.DeleteID });
+
+            if (!string.IsNullOrWhiteSpace(PoNo))
                 {
                     _List = _List.Where(x => x.PoNo.ToLower().Contains(PoNo.ToLower()));
                 }
@@ -155,5 +155,38 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 }
                 return (MessageStr);
             }
+
+        public string DeleteTimeDetail(string DeleteID)
+        {
+            string MessageStr = "刪除失敗!";
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(DeleteID))
+                {
+                    string[] DeleteIDList = null;
+                    DeleteID = DeleteID.Replace("jqg_grid_gb1_", "").TrimEnd(',');
+                    DeleteIDList = DeleteID.Split(',');
+                    foreach (var item in DeleteIDList)
+                    {
+                        Models.SwipeSet deleteTolist = _db.SwipeSets.Where(x => x.DeleteID.ToString() == item).FirstOrDefault();
+                        _db.SwipeSets.Remove(deleteTolist);
+                    }
+                    _db.SaveChanges();
+
+                    MessageStr = "刪除成功!";
+                }
+                else
+                {
+                    MessageStr = "刪除失敗!請勾選刪除資料。";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageStr = ex.ToString();
+            }
+
+            return (MessageStr);
+        }
     }
 }

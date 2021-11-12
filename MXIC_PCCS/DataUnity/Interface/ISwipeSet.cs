@@ -15,5 +15,11 @@ namespace MXIC_PCCS.DataUnity.Interface
         string EditTime(string EditID, string SwipeStartTime, string SwipeEndTime);
 
         string InsertSwipeSetTime(string PoNo, DateTime Date, string WorkShift, string SwipeStartTime, string SwipeEndTime);
+        /// <summary>
+        /// 刪除時間設定
+        /// </summary>
+        /// <param name="DeleteID"></param>
+        /// <returns></returns>
+        string DeleteTimeDetail(string DeleteID);
     }
 }

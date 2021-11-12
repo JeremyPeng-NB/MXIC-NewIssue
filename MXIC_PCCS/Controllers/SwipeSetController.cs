@@ -48,5 +48,12 @@ namespace MXIC_PCCS.Controllers
 
             return str;
         }
+
+        public string DeleteTimeDetail(string DeleteID)
+        {
+            string str = _ISwipeSet.DeleteTimeDetail(DeleteID);
+
+            return str;
+        }
     }
 }

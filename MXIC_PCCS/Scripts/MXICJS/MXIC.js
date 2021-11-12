@@ -105,8 +105,9 @@ if (title == 'MXIC') {
     ajaxUrl = "/SwipeSet/UserList"
     inserturl = "/SwipeSet/InsertSwipeSetTime"
     editDetailUrl = "/SwipeSet/EditTimeDetail",
-    editUrl = "/SwipeSet/EditTime"
-    multiselect = false;
+        editUrl = "/SwipeSet/EditTime"
+    deleteurl = "/SwipeSet/DeleteTimeDetail"
+    multiselect = true;
 }
 //dataList
 // var dataList = [
