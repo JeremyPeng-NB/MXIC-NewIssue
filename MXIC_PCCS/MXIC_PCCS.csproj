@@ -377,9 +377,7 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="Content\出勤班表範本.xlsx" />
     <Content Include="Content\證照範本.xlsx" />
-    <Content Include="Content\MXIC\計價單.xlsx" />
     <Content Include="Content\報價單範本.xlsx" />
-    <Content Include="Content\計價單.xlsx" />
     <Content Include="Content\廠商範本.xlsx" />
     <None Include="Properties\PublishProfiles\Web_Deploy_Package.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
