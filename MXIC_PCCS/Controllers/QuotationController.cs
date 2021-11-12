@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -33,49 +34,35 @@ namespace MXIC_PCCS.Controllers
         {
             try
             {
-                //再匯入EXCEL
                 //EPPLUS 授權 (不可註解刪除)
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                 //檢查匯入的EXCEL檔
                 if (file != null && file.ContentLength > 0)
                 {
-                    //宣告儲存空間(儲存報價單的內容)
-                    string VendorName, PoNo;
-
-                    List<QuotationProperty> Property_ListModel = new List<QuotationProperty>();
-
-                    //以下是EXCEL讀檔
-                    using (var excelPkg = new ExcelPackage(file.InputStream))
+                    //取得Sheet
+                    using (var ExcelPkg = new ExcelPackage(file.InputStream))
                     {
-                        //取得Sheet
-                        ExcelWorksheet sheet = excelPkg.Workbook.Worksheets["PO報價"];
+                        ExcelWorksheet PoSheet = ExcelPkg.Workbook.Worksheets["PO報價"];
 
-                        //廠商和PO 直接讀取對應位置的內容
-                        //抓不到就先直接return 
-                        if (sheet.Cells[5, 7].Text.Contains("供應商Vendor") && !string.IsNullOrWhiteSpace(sheet.Cells[5, 9].Text))
+                        int POendRowIndex = PoSheet.Dimension.End.Row;
+                        int POendColumn = PoSheet.Dimension.End.Column;
+
+                        string PoNo = "", VendorName = "";
+
+                        //PO
+                        if (PoSheet.Cells[7, 7].Text.Contains("PO NO.") && !string.IsNullOrWhiteSpace(PoSheet.Cells[7, 9].Text))
                         {
-                            VendorName = sheet.Cells[5, 9].Text;
-                        }
-                        else
-                        {
-                            SB.Clear();
-                            SB.AppendFormat("<script>alert('找不到供應商名稱!');window.location.href='../Quotation/Index';</script>");
-                            return Content(SB.ToString());
+                            PoNo = PoSheet.Cells[7, 9].Text;
                         }
 
-                        if (sheet.Cells[7, 7].Text.Contains("PO NO.") && !string.IsNullOrWhiteSpace(sheet.Cells[7, 9].Text))
+                        //VedorName
+                        if (PoSheet.Cells[5, 7].Text.Contains("供應商Vendor") && !string.IsNullOrWhiteSpace(PoSheet.Cells[5, 9].Text))
                         {
-                            PoNo = sheet.Cells[7, 9].Text;
-                        }
-                        else
-                        {
-                            SB.Clear();
-                            SB.AppendFormat("<script>alert('找不到PO Number!');window.location.href='../Quotation/Index';</script>");
-                            return Content(SB.ToString());
+                            VendorName = PoSheet.Cells[5, 9].Text;
                         }
 
-
+                        //清除現有PO資料
                         var MessageStr = _IQuotation.ClearTable(PoNo);
                         if (!MessageStr.Contains("判讀結束!"))
                         {
@@ -84,50 +71,29 @@ namespace MXIC_PCCS.Controllers
                             return Content(SB.ToString());
                         }
 
-                        //剩下的資料範圍
-                        int startRowIndex = 9;//起始列
-                        int endRowIndex = 33;//結束列
-                        int startColumn = 4;//開始欄
-                        int endColumn = 7;//結束欄
+                        //PO報價上傳儲存資料庫
+                        List<QuotationProperty> Property_ListModel = new List<QuotationProperty>();
 
-                        //直接讀取剩下的資料
-                        for (int currentRow = startRowIndex; currentRow <= endRowIndex; currentRow++)
+                        for (int i = 1; i <= POendRowIndex; i++)
                         {
-                            QuotationProperty Property_Model = new QuotationProperty();
-                            for (int currentColumn = startColumn; currentColumn <= endColumn; currentColumn++)
+                            for (int j = 1; j <= POendColumn; j++)
                             {
-                                if (sheet.Cells[currentRow, currentColumn].Text == "")
+                                if (PoSheet.Cells[i, j].Text.Contains("10-") || PoSheet.Cells[i, j].Text.Contains("20-"))
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    //Response.Write(sheet.Cells[currentRow, currentColumn].Text);
-                                    //Response.Write("<br/>");
-
-                                    switch (currentColumn)
-                                    {
-                                        case 4:
-                                            Property_Model.PoClassID = sheet.Cells[currentRow, currentColumn].Text;
-                                            break;
-                                        case 5:
-                                            Property_Model.PoClassName = sheet.Cells[currentRow, currentColumn].Text;
-                                            break;
-                                        case 6:
-                                            Property_Model.Unit = sheet.Cells[currentRow, currentColumn].Text;
-                                            break;
-                                        case 7:
-                                            Property_Model.Amount = sheet.Cells[currentRow, currentColumn].Text;
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                                    QuotationProperty Property_Model = new QuotationProperty();
+                                    Property_Model.PoClassID = PoSheet.Cells[i, j].Text;
+                                    Property_Model.PoClassName = PoSheet.Cells[i, j + 1].Text;
+                                    Property_Model.Unit = PoSheet.Cells[i, j + 2].Text;
+                                    Property_Model.Amount = PoSheet.Cells[i, j + 3].Text;
+                                    Property_Model.ExcelPosition = i.ToString() + "," + (j + 3).ToString();
+                                    Property_ListModel.Add(Property_Model);
                                 }
                             }
-                            if (Property_Model.PoClassID != null)
-                                Property_ListModel.Add(Property_Model);
                         }
+
                         _IQuotation.ImportQuotation(VendorName, PoNo, Property_ListModel);
+
+                        file.SaveAs(ConfigurationManager.AppSettings["ExampleDirectory"] + PoNo + ".xlsx");
                     }
                 }
                 else

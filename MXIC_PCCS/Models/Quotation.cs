@@ -41,5 +41,8 @@ namespace MXIC_PCCS.Models
 
        
         public int Sequence { get; set; }
+
+        [StringLength(50)]
+        public string ExcelPosition { get; set; }
     }
 }

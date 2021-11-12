@@ -98,7 +98,8 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                     LicPossess = "有",
                     Unit = Property_ListModel[i].Unit,
                     Amount = Property_ListModel[i].Amount,
-                    Sequence = 1+ i
+                    Sequence = 1+ i,
+                    ExcelPosition = Property_ListModel[i].ExcelPosition
                 };
 
                 _db.MXIC_Quotations.Add(AddQuotationItem);

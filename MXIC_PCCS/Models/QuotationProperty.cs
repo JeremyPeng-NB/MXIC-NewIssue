@@ -16,5 +16,6 @@ namespace MXIC_PCCS.Models
 
         public string Amount { get; set; }
 
+        public string ExcelPosition { get; set; }
     }
 }

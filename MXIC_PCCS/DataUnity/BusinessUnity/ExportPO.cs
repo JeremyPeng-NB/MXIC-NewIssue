@@ -55,12 +55,15 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
         }
         #endregion
 
+        
+
         private void DownloadExcel(string PoNo, string VendorName, DateTime Date, List<CalculationQuotation> QuotationList)
         {
+
             //Step 1. 寫入EXCEL 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            var ExcelPath = ConfigurationManager.AppSettings["DowloadDirectory"]; 
+            var ExcelPath = ConfigurationManager.AppSettings["DowloadDirectory"] + PoNo + ".xlsx"; 
             var DownloadPath = new FileInfo(ExcelPath);
             using (var Excel = new ExcelPackage(DownloadPath))
             {
@@ -72,175 +75,180 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 //Step 1-1.把數量寫入計價單   
                 foreach (var QuotationItem in QuotationList)
                 {
+                    var PositionIndex = QuotationItem.ExcelPosition.Split(',');
+                    var i = Convert.ToInt32(PositionIndex[0]);
+                    var j = Convert.ToInt32(PositionIndex[1]);
                     if (QuotationItem.Count != 0)
                     {
-                        switch (QuotationItem.PoClassID)
-                        {
-                            #region 把數量寫入計價單
-                            case "10-1":
-                                WorkSheet.Cells[9, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-2":
-                                WorkSheet.Cells[10, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-3":
-                                WorkSheet.Cells[11, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-4":
-                                WorkSheet.Cells[12, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-5":
-                                WorkSheet.Cells[13, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-6":
-                                WorkSheet.Cells[14, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-7":
-                                WorkSheet.Cells[15, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-8":
-                                WorkSheet.Cells[16, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-9":
-                                WorkSheet.Cells[17, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-10":
-                                WorkSheet.Cells[18, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-11":
-                                WorkSheet.Cells[19, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-12":
-                                WorkSheet.Cells[20, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-13":
-                                WorkSheet.Cells[21, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-14":
-                                WorkSheet.Cells[22, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-15":
-                                WorkSheet.Cells[23, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-16":
-                                WorkSheet.Cells[24, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-17":
-                                WorkSheet.Cells[25, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-18":
-                                WorkSheet.Cells[26, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-19":
-                                WorkSheet.Cells[27, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-20":
-                                WorkSheet.Cells[28, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-21":
-                                WorkSheet.Cells[29, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-22":
-                                WorkSheet.Cells[30, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-23":
-                                WorkSheet.Cells[31, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-24":
-                                WorkSheet.Cells[32, 7].Value = QuotationItem.Count;
-                                break;
-                            case "10-25":
-                                WorkSheet.Cells[33, 7].Value = QuotationItem.Count;
-                                break;
-                            default:
-                                break;
-                                #endregion
-                        }
+                        WorkSheet.Cells[i, j].Value = QuotationItem.Count;
+                        //switch (QuotationItem.PoClassID)
+                        //{
+                        //    #region 把數量寫入計價單
+                        //    case "10-1":
+                        //        WorkSheet.Cells[9, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-2":
+                        //        WorkSheet.Cells[10, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-3":
+                        //        WorkSheet.Cells[11, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-4":
+                        //        WorkSheet.Cells[12, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-5":
+                        //        WorkSheet.Cells[13, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-6":
+                        //        WorkSheet.Cells[14, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-7":
+                        //        WorkSheet.Cells[15, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-8":
+                        //        WorkSheet.Cells[16, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-9":
+                        //        WorkSheet.Cells[17, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-10":
+                        //        WorkSheet.Cells[18, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-11":
+                        //        WorkSheet.Cells[19, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-12":
+                        //        WorkSheet.Cells[20, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-13":
+                        //        WorkSheet.Cells[21, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-14":
+                        //        WorkSheet.Cells[22, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-15":
+                        //        WorkSheet.Cells[23, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-16":
+                        //        WorkSheet.Cells[24, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-17":
+                        //        WorkSheet.Cells[25, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-18":
+                        //        WorkSheet.Cells[26, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-19":
+                        //        WorkSheet.Cells[27, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-20":
+                        //        WorkSheet.Cells[28, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-21":
+                        //        WorkSheet.Cells[29, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-22":
+                        //        WorkSheet.Cells[30, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-23":
+                        //        WorkSheet.Cells[31, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-24":
+                        //        WorkSheet.Cells[32, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    case "10-25":
+                        //        WorkSheet.Cells[33, 7].Value = QuotationItem.Count;
+                        //        break;
+                        //    default:
+                        //        break;
+                        //        #endregion
+                        //}
                     }
                     else
                     {
-                        switch (QuotationItem.PoClassID)
-                        {
-                            #region 把數量為0的儲存格隱藏
-                            case "10-1":
-                                WorkSheet.Row(9).Hidden = true;
-                                break;
-                            case "10-2":
-                                WorkSheet.Row(10).Hidden = true;
-                                break;
-                            case "10-3":
-                                WorkSheet.Row(11).Hidden = true;
-                                break;
-                            case "10-4":
-                                WorkSheet.Row(12).Hidden = true;
-                                break;
-                            case "10-5":
-                                WorkSheet.Row(13).Hidden = true;
-                                break;
-                            case "10-6":
-                                WorkSheet.Row(14).Hidden = true;
-                                break;
-                            case "10-7":
-                                WorkSheet.Row(15).Hidden = true;
-                                break;
-                            case "10-8":
-                                WorkSheet.Row(16).Hidden = true;
-                                break;
-                            case "10-9":
-                                WorkSheet.Row(17).Hidden = true;
-                                break;
-                            case "10-10":
-                                WorkSheet.Row(18).Hidden = true;
-                                break;
-                            case "10-11":
-                                WorkSheet.Row(19).Hidden = true;
-                                break;
-                            case "10-12":
-                                WorkSheet.Row(20).Hidden = true;
-                                break;
-                            case "10-13":
-                                WorkSheet.Row(21).Hidden = true;
-                                break;
-                            case "10-14":
-                                WorkSheet.Row(22).Hidden = true;
-                                break;
-                            case "10-15":
-                                WorkSheet.Row(23).Hidden = true;
-                                break;
-                            case "10-16":
-                                WorkSheet.Row(24).Hidden = true;
-                                break;
-                            case "10-17":
-                                WorkSheet.Row(25).Hidden = true;
-                                break;
-                            case "10-18":
-                                WorkSheet.Row(26).Hidden = true;
-                                break;
-                            case "10-19":
-                                WorkSheet.Row(27).Hidden = true;
-                                break;
-                            case "10-20":
-                                WorkSheet.Row(28).Hidden = true;
-                                break;
-                            case "10-21":
-                                WorkSheet.Row(29).Hidden = true;
-                                break;
-                            case "10-22":
-                                WorkSheet.Row(30).Hidden = true;
-                                break;
-                            case "10-23":
-                                WorkSheet.Row(31).Hidden = true;
-                                break;
-                            case "10-24":
-                                WorkSheet.Row(32).Hidden = true;
-                                break;
-                            case "10-25":
-                                WorkSheet.Row(33).Hidden = true;
-                                break;
-                            default:
-                                break;
-                                #endregion
-                        }
+                        WorkSheet.Row(i).Hidden = true;
+                        //switch (QuotationItem.PoClassID)
+                        //{
+                        //    #region 把數量為0的儲存格隱藏
+                        //    case "10-1":
+                        //        WorkSheet.Row(9).Hidden = true;
+                        //        break;
+                        //    case "10-2":
+                        //        WorkSheet.Row(10).Hidden = true;
+                        //        break;
+                        //    case "10-3":
+                        //        WorkSheet.Row(11).Hidden = true;
+                        //        break;
+                        //    case "10-4":
+                        //        WorkSheet.Row(12).Hidden = true;
+                        //        break;
+                        //    case "10-5":
+                        //        WorkSheet.Row(13).Hidden = true;
+                        //        break;
+                        //    case "10-6":
+                        //        WorkSheet.Row(14).Hidden = true;
+                        //        break;
+                        //    case "10-7":
+                        //        WorkSheet.Row(15).Hidden = true;
+                        //        break;
+                        //    case "10-8":
+                        //        WorkSheet.Row(16).Hidden = true;
+                        //        break;
+                        //    case "10-9":
+                        //        WorkSheet.Row(17).Hidden = true;
+                        //        break;
+                        //    case "10-10":
+                        //        WorkSheet.Row(18).Hidden = true;
+                        //        break;
+                        //    case "10-11":
+                        //        WorkSheet.Row(19).Hidden = true;
+                        //        break;
+                        //    case "10-12":
+                        //        WorkSheet.Row(20).Hidden = true;
+                        //        break;
+                        //    case "10-13":
+                        //        WorkSheet.Row(21).Hidden = true;
+                        //        break;
+                        //    case "10-14":
+                        //        WorkSheet.Row(22).Hidden = true;
+                        //        break;
+                        //    case "10-15":
+                        //        WorkSheet.Row(23).Hidden = true;
+                        //        break;
+                        //    case "10-16":
+                        //        WorkSheet.Row(24).Hidden = true;
+                        //        break;
+                        //    case "10-17":
+                        //        WorkSheet.Row(25).Hidden = true;
+                        //        break;
+                        //    case "10-18":
+                        //        WorkSheet.Row(26).Hidden = true;
+                        //        break;
+                        //    case "10-19":
+                        //        WorkSheet.Row(27).Hidden = true;
+                        //        break;
+                        //    case "10-20":
+                        //        WorkSheet.Row(28).Hidden = true;
+                        //        break;
+                        //    case "10-21":
+                        //        WorkSheet.Row(29).Hidden = true;
+                        //        break;
+                        //    case "10-22":
+                        //        WorkSheet.Row(30).Hidden = true;
+                        //        break;
+                        //    case "10-23":
+                        //        WorkSheet.Row(31).Hidden = true;
+                        //        break;
+                        //    case "10-24":
+                        //        WorkSheet.Row(32).Hidden = true;
+                        //        break;
+                        //    case "10-25":
+                        //        WorkSheet.Row(33).Hidden = true;
+                        //        break;
+                        //    default:
+                        //        break;
+                        //        #endregion
+                        //}
                     }
                 }
 
@@ -258,7 +266,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 {
                     workbook.LoadFromStream(Excel.Stream as MemoryStream);
                     workbook.SaveToStream(fileStream, Spire.Xls.FileFormat.PDF);
-                    workbook.SaveToFile(ConfigurationManager.AppSettings["DowloadPDF"]);
+                    workbook.SaveToFile(ConfigurationManager.AppSettings["DowloadPDF"] + PoNo + ".pdf");
                 }
                 Excel.Dispose();
                 fileStream.Position = 0;
