@@ -104,8 +104,8 @@ if (title == 'MXIC') {
     tablename = "MXIC_SwipeSet"
     ajaxUrl = "/SwipeSet/UserList"
     inserturl = "/SwipeSet/InsertSwipeSetTime"
-    editDetailUrl = "/SwipeSet/EditTimeDetail",
-        editUrl = "/SwipeSet/EditTime"
+    editDetailUrl = "/SwipeSet/EditTimeDetail"
+    editUrl = "/SwipeSet/EditTime"
     deleteurl = "/SwipeSet/DeleteTimeDetail"
     multiselect = true;
 }
