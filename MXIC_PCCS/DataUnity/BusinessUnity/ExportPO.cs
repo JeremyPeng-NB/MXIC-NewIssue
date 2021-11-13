@@ -253,9 +253,9 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 }
 
                 //Vendor
-                WorkSheet.Cells[5, 8].Value = VendorName;
+                //WorkSheet.Cells[5, 8].Value = VendorName;
                 //PO
-                WorkSheet.Cells[7, 8].Value = PoNo;
+                //WorkSheet.Cells[7, 8].Value = PoNo;
                 //申請月份
                 //WorkSheet.Cells[9, 1].Value = Date.ToString("yyyy/MM");
 
@@ -641,7 +641,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                 {
                     //撈出報價單的項目資料
                     #region 撈出報價單的項目資料
-                    var QuotationList = _db.MXIC_Quotations.OrderBy(x => x.Sequence).Where(x => x.PoNo == PoNo).Select(x => new { x.PoNo, x.VendorName, x.PoClassID, x.Amount });
+                    var QuotationList = _db.MXIC_Quotations.OrderBy(x => x.Sequence).Where(x => x.PoNo == PoNo).Select(x => new { x.PoNo, x.VendorName, x.PoClassID, x.Amount , x.ExcelPosition});
 
                     List<CalculationQuotation> QuotationItem_ListModel = new List<CalculationQuotation>();
 
@@ -651,6 +651,7 @@ namespace MXIC_PCCS.DataUnity.BusinessUnity
                         QuotationItem_Model.PoClassID = QuotationRow.PoClassID;
                         QuotationItem_Model.Amount = QuotationRow.Amount;
                         QuotationItem_Model.Count = 0.0;
+                        QuotationItem_Model.ExcelPosition = QuotationRow.ExcelPosition;
                         QuotationItem_ListModel.Add(QuotationItem_Model);
                         PoNumber = QuotationRow.PoNo;
                         VendorName = QuotationRow.VendorName;

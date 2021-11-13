@@ -41,11 +41,11 @@ namespace MXIC_PCCS.Controllers
             {
                 try
                 {
-                    System.IO.File.Copy(ConfigurationManager.AppSettings["ExampleDirectory"], ConfigurationManager.AppSettings["DowloadDirectory"], true);
+                    System.IO.File.Copy(ConfigurationManager.AppSettings["ExampleDirectory"] + PONumber + ".xlsx", ConfigurationManager.AppSettings["DowloadDirectory"] + PONumber + ".xlsx", true);
                     responseStr = ExportPO(PONumber, Month);
                     if (responseStr == "寫入成功")
                     {
-                        string filepath = Server.MapPath("~/Content/PDF/計價單.pdf");
+                        string filepath = Server.MapPath("~/Content/PDF/" + PONumber + ".pdf");
                         string filename = Path.GetFileName(filepath);
                         Stream iStream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.Read);
                         return File(iStream, "application/pdf", filename);

@@ -149,10 +149,6 @@ namespace MXIC_PCCS.Controllers
             //呼叫IQuotation介面中的QuotationList方法
             string jsonStr = _IQuotation.DelQuotation(PoNo);
 
-
-
-
-
             return jsonStr;
 
         }
